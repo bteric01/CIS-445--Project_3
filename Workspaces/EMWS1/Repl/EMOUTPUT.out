@@ -1,0 +1,67 @@
+*------------------------------------------------------------*
+User:                bteric01
+Date:                November 05, 2015
+Time:                14:09:24
+*------------------------------------------------------------*
+* Training Output
+*------------------------------------------------------------*
+ 
+ 
+ 
+ 
+Variable Summary
+ 
+          Measurement    Frequency
+ Role        Level         Count
+ 
+INPUT      INTERVAL          10
+INPUT      NOMINAL            2
+TARGET     BINARY             1
+
+
+*------------------------------------------------------------*
+* Score Output
+*------------------------------------------------------------*
+ 
+ 
+ 
+ 
+Limits and Replacement Values for Interval Variables
+ 
+                                           Lower                       Upper
+            Replace            Lower    Replacement        Upper    Replacement
+Variable    Variable           limit       Value           Limit       Value
+ 
+clage       REP_clage         -80.78        -80.78        443.09        443.09
+clno        REP_clno           -9.57         -9.57         52.13         52.13
+debtinc     REP_debtinc         6.77          6.77         60.81         60.81
+delinq      REP_delinq         -3.15         -3.15          4.08          4.08
+derog       REP_derog          -2.20         -2.20          2.68          2.68
+loan        REP_loan       -15948.42     -15948.42      53316.59      53316.59
+mortdue     REP_mortdue    -57459.22     -57459.22     204609.03     204609.03
+ninq        REP_ninq           -3.96         -3.96          6.27          6.27
+value       REP_value      -71444.81     -71444.81     276406.04     276406.04
+yoj         REP_yoj           -14.03        -14.03         31.77         31.77
+
+
+*------------------------------------------------------------*
+* Report Output
+*------------------------------------------------------------*
+ 
+ 
+ 
+ 
+Replacement Counts
+ 
+Obs    Variable    Label                                 Role     Train    Validation
+ 
+  1    clage       Age of oldest trade line in months    INPUT      15         14
+  2    clno        Number of trade (credit) lines        INPUT      19         18
+  3    debtinc     Debt to income ratio                  INPUT      30         22
+  4    delinq      Number of delinquent trade lines      INPUT      52         38
+  5    derog       Number of major derogatory reports    INPUT      59         71
+  6    loan        Amount of current loan request        INPUT      52         34
+  7    mortdue     Amount due on existing mortgage       INPUT      48         46
+  8    ninq        Number of recent credit inquiries     INPUT      59         62
+  9    value       Value of current property             INPUT      46         43
+ 10    yoj         Years on current job                  INPUT      13          5

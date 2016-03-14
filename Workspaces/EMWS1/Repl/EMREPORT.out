@@ -1,0 +1,18 @@
+ 
+                                                                                                                                                                                                                                                                
+ 
+ 
+Replacement Counts
+
+Obs    Variable    Label                                 Role     Train    Validation
+
+  1    clage       Age of oldest trade line in months    INPUT      15         14    
+  2    clno        Number of trade (credit) lines        INPUT      19         18    
+  3    debtinc     Debt to income ratio                  INPUT      30         22    
+  4    delinq      Number of delinquent trade lines      INPUT      52         38    
+  5    derog       Number of major derogatory reports    INPUT      59         71    
+  6    loan        Amount of current loan request        INPUT      52         34    
+  7    mortdue     Amount due on existing mortgage       INPUT      48         46    
+  8    ninq        Number of recent credit inquiries     INPUT      59         62    
+  9    value       Value of current property             INPUT      46         43    
+ 10    yoj         Years on current job                  INPUT      13          5    

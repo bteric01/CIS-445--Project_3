@@ -1,0 +1,50 @@
+*------------------------------------------------------------*
+User:                bteric01
+Date:                November 05, 2015
+Time:                14:10:35
+*------------------------------------------------------------*
+* Training Output
+*------------------------------------------------------------*
+ 
+ 
+ 
+ 
+Variable Summary
+ 
+            Measurement    Frequency
+Role           Level         Count
+ 
+INPUT        INTERVAL          10
+INPUT        NOMINAL            2
+REJECTED     INTERVAL          10
+TARGET       BINARY             1
+ 
+ 
+ 
+Computed Transformations
+(maximum 500 observations printed)
+ 
+                            Input
+Input Name     Role         Level      Name                Level      Formula
+ 
+REP_clage      INPUT       INTERVAL    LOG_REP_clage      INTERVAL    log(REP_clage  + 1)
+REP_clno       INPUT       INTERVAL    LOG_REP_clno       INTERVAL    log(REP_clno  + 1)
+REP_debtinc    INPUT       INTERVAL    LOG_REP_debtinc    INTERVAL    log(REP_debtinc  + 1)
+REP_delinq     INPUT       INTERVAL    LOG_REP_delinq     INTERVAL    log(REP_delinq  + 1)
+REP_derog      INPUT       INTERVAL    LOG_REP_derog      INTERVAL    log(REP_derog  + 1)
+REP_loan       INPUT       INTERVAL    LOG_REP_loan       INTERVAL    log(REP_loan  + 1)
+REP_mortdue    INPUT       INTERVAL    LOG_REP_mortdue    INTERVAL    log(REP_mortdue  + 1)
+REP_ninq       INPUT       INTERVAL    LOG_REP_ninq       INTERVAL    log(REP_ninq  + 1)
+REP_value      INPUT       INTERVAL    LOG_REP_value      INTERVAL    log(REP_value  + 1)
+REP_yoj        INPUT       INTERVAL    LOG_REP_yoj        INTERVAL    log(REP_yoj  + 1)
+yoj            REJECTED    INTERVAL    LOG_yoj            INTERVAL    log(yoj  + 1)
+
+
+*------------------------------------------------------------*
+* Score Output
+*------------------------------------------------------------*
+
+
+*------------------------------------------------------------*
+* Report Output
+*------------------------------------------------------------*

@@ -1,0 +1,33 @@
+ 
+                                                                                               
+ 
+ 
+Variable Summary
+
+            Measurement    Frequency
+Role           Level         Count
+
+ID           INTERVAL           1   
+INPUT        INTERVAL          10   
+INPUT        NOMINAL            2   
+REJECTED     INTERVAL          10   
+TARGET       BINARY             1   
+ 
+                                                                                               
+ 
+ 
+
+Obs    Input Variable     Group Variable
+
+  1    LOG_REP_clage      GRP_LOG_REP_clage  
+  2    LOG_REP_clno       GRP_LOG_REP_clno   
+  3    LOG_REP_debtinc    GRP_LOG_REP_debtinc
+  4    LOG_REP_delinq     GRP_LOG_REP_delinq 
+  5    LOG_REP_derog      GRP_LOG_REP_derog  
+  6    LOG_REP_loan       GRP_LOG_REP_loan   
+  7    LOG_REP_mortdue    GRP_LOG_REP_mortdue
+  8    LOG_REP_ninq       GRP_LOG_REP_ninq   
+  9    LOG_REP_value      GRP_LOG_REP_value  
+ 10    LOG_REP_yoj        GRP_LOG_REP_yoj    
+ 11    job                GRP_job            
+ 12    reason             GRP_reason         

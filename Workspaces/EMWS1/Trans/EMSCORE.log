@@ -1,0 +1,1079 @@
+MPRINT(EM_DIAGRAM):    data _null_;
+MPRINT(EM_DIAGRAM):   call symput('NLDATE', strip(put(date(), NLDATE.)));
+MPRINT(EM_DIAGRAM):   call symput('NLTIME', strip(put(datetime(), NLTIME.)));
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):   data _null_;
+MPRINT(EM_DIAGRAM):   nldate= sasmsg("sashelp.dmine", "log_date_note", 'N', "November 05, 
+2015" );
+MPRINT(EM_DIAGRAM):   nltime= sasmsg("sashelp.dmine", "log_time_note", 'N', "14:10:30" );
+MPRINT(EM_DIAGRAM):   put "*------------------------------------------------------------*";
+MPRINT(EM_DIAGRAM):   put "* Score Log";
+MPRINT(EM_DIAGRAM):   put nldate;
+MPRINT(EM_DIAGRAM):   put nltime;
+MPRINT(EM_DIAGRAM):   put "*------------------------------------------------------------*";
+MPRINT(EM_DIAGRAM):   run;
+*------------------------------------------------------------*
+* Score Log
+Date:                November 05, 2015
+Time:                14:10:30
+*------------------------------------------------------------*
+MPRINT(EM_DIAGRAM):    filename O12TO88K 
+"C:\Users\bteric01\Documents\Tutorials_Projects\Project_3\Workspaces\EMWS1\Trans\EMSCORE.out" 
+encoding="UTF-8" NOBOM;
+MPRINT(EM_DIAGRAM):   proc printto print=O12TO88K new;
+MPRINT(EM_DIAGRAM):   run;
+96952      proc sort data=EMWS1.Trans_RESULT out=WORK.TransRESULT NOTHREADS;
+MPRINT(EM_DIAGRAM):    proc sort data=EMWS1.Trans_RESULT out=WORK.TransRESULT NOTHREADS;
+96953      by INPUTNAME;
+MPRINT(EM_DIAGRAM):   by INPUTNAME;
+96954      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: There were 11 observations read from the data set EMWS1.TRANS_RESULT.
+NOTE: The data set WORK.TRANSRESULT has 11 observations and 11 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+96955      proc sort data=EMWS1.Trans_VariableSet(KEEP= NAME FAMILY REPORT
+96955    ! rename=(NAME=INPUTNAME)) out=WORK.TransVARSET NOTHREADS;
+MPRINT(EM_DIAGRAM):   proc sort data=EMWS1.Trans_VariableSet(KEEP= NAME FAMILY REPORT 
+rename=(NAME=INPUTNAME)) out=WORK.TransVARSET NOTHREADS;
+96956      by INPUTNAME;
+MPRINT(EM_DIAGRAM):   by INPUTNAME;
+96957      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: There were 23 observations read from the data set EMWS1.TRANS_VARIABLESET.
+NOTE: The data set WORK.TRANSVARSET has 23 observations and 3 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.03 seconds
+      
+
+96958      data WORK.TransRESULT;
+MPRINT(EM_DIAGRAM):   data WORK.TransRESULT;
+96959      merge WORK.TransRESULT WORK.TransVARSET;
+MPRINT(EM_DIAGRAM):   merge WORK.TransRESULT WORK.TransVARSET;
+96960      by INPUTNAME;
+MPRINT(EM_DIAGRAM):   by INPUTNAME;
+96961      if NAME ne '' then output;
+MPRINT(EM_DIAGRAM):   if NAME ne '' then output;
+96962      run;
+MPRINT(EM_DIAGRAM):   run;
+
+WARNING: Multiple lengths were specified for the BY variable INPUTNAME by input data sets. 
+         This might cause unexpected results.
+NOTE: There were 11 observations read from the data set WORK.TRANSRESULT.
+NOTE: There were 23 observations read from the data set WORK.TRANSVARSET.
+NOTE: The data set WORK.TRANSRESULT has 11 observations and 13 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+96963      filename _code
+96963    ! "C:\Users\bteric01\Documents\Tutorials_Projects\Project_3\Workspaces\EMWS1\Trans\TRA
+96963    ! INDELTACODE.sas";
+MPRINT(EM_DIAGRAM):   filename _code 
+"C:\Users\bteric01\Documents\Tutorials_Projects\Project_3\Workspaces\EMWS1\Trans\TRAINDELTACODE
+.sas";
+96964      data _null_;
+MPRINT(EM_DIAGRAM):   data _null_;
+96965      set WORK.TransRESULT;
+MPRINT(EM_DIAGRAM):   set WORK.TransRESULT;
+96966      length String $200;
+MPRINT(EM_DIAGRAM):   length String $200;
+96967      file _code;
+MPRINT(EM_DIAGRAM):   file _code;
+96968      String = 'if NAME="'!!strip(name)!!'" then do;';
+MPRINT(EM_DIAGRAM):   String = 'if NAME="'!!strip(name)!!'" then do;';
+96969      put / String;
+MPRINT(EM_DIAGRAM):   put / String;
+96970      if family ne '' then do;
+MPRINT(EM_DIAGRAM):   if family ne '' then do;
+96971      String = '   FAMILY ="'!!strip(family)!!'";';
+MPRINT(EM_DIAGRAM):   String = '   FAMILY ="'!!strip(family)!!'";';
+96972      put String;
+MPRINT(EM_DIAGRAM):   put String;
+96973      end;
+MPRINT(EM_DIAGRAM):   end;
+96974      select(formula);
+MPRINT(EM_DIAGRAM):   select(formula);
+96975      when('Interaction') put '   FAMILY  ="INTERACTION";';
+MPRINT(EM_DIAGRAM):   when('Interaction') put '   FAMILY  ="INTERACTION";';
+96976      when('') put '   COMMENT = "' method 'transformation of ' INPUTVAR '";';
+MPRINT(EM_DIAGRAM):   when('') put '   COMMENT = "' method 'transformation of ' INPUTVAR '";';
+96977      otherwise put '   COMMENT = "' formula '";';
+MPRINT(EM_DIAGRAM):   otherwise put '   COMMENT = "' formula '";';
+96978      end;
+MPRINT(EM_DIAGRAM):   end;
+96979      String = '   ROLE ="'!!strip(role)!!'";';
+MPRINT(EM_DIAGRAM):   String = '   ROLE ="'!!strip(role)!!'";';
+96980      put String;
+MPRINT(EM_DIAGRAM):   put String;
+96981      if REPORT="" then REPORT = "N";
+MPRINT(EM_DIAGRAM):   if REPORT="" then REPORT = "N";
+96982      String = '   REPORT ="'!!strip(report)!!'";';
+MPRINT(EM_DIAGRAM):   String = '   REPORT ="'!!strip(report)!!'";';
+96983      put String;
+MPRINT(EM_DIAGRAM):   put String;
+96984      String = '   LEVEL  ="'!!strip(level)!!'";';
+MPRINT(EM_DIAGRAM):   String = '   LEVEL  ="'!!strip(level)!!'";';
+96985      put String;
+MPRINT(EM_DIAGRAM):   put String;
+96986      put 'end;';
+MPRINT(EM_DIAGRAM):   put 'end;';
+96987      if formula ne 'Interaction' and INPUTNAME ne '' then do;
+MPRINT(EM_DIAGRAM):   if formula ne 'Interaction' and INPUTNAME ne '' then do;
+96988      String = 'if NAME="'!!strip(INPUTNAME)!!'" then delete;';
+MPRINT(EM_DIAGRAM):   String = 'if NAME="'!!strip(INPUTNAME)!!'" then delete;';
+96989      put String;
+MPRINT(EM_DIAGRAM):   put String;
+96990      end;
+MPRINT(EM_DIAGRAM):   end;
+96991      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: Variable method is uninitialized.
+NOTE: Variable INPUTVAR is uninitialized.
+NOTE: The file _CODE is:
+      
+      Filename=C:\Users\bteric01\Documents\Tutorials_Projects\Project_3\Workspaces\EMWS1\Trans\
+      TRAINDELTACODE.sas,
+      RECFM=V,LRECL=32767,File Size (bytes)=0,
+      Last Modified=05Nov2015:14:10:30,
+      Create Time=05Nov2015:05:45:02
+
+NOTE: 88 records were written to the file _CODE.
+      The minimum record length was 0.
+      The maximum record length was 38.
+NOTE: There were 11 observations read from the data set WORK.TRANSRESULT.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+      
+
+96992      filename _code;
+MPRINT(EM_DIAGRAM):   filename _code;
+NOTE: Fileref _CODE has been deassigned.
+96993      filename emflow
+96993    ! "C:\Users\bteric01\Documents\Tutorials_Projects\Project_3\Workspaces\EMWS1\Trans\EMF
+96993    ! LOWSCORE.sas";
+MPRINT(EM_DIAGRAM):    filename emflow 
+"C:\Users\bteric01\Documents\Tutorials_Projects\Project_3\Workspaces\EMWS1\Trans\EMFLOWSCORE.sa
+s";
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   * Trans: Scoring DATA data;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+96994      *------------------------------------------------------------*;
+96995      * Trans: Scoring DATA data;
+96996      *------------------------------------------------------------*;
+96997      data EMWS1.Trans_TRAIN
+96998      / view=EMWS1.Trans_TRAIN
+96999      ;
+MPRINT(EM_DIAGRAM):   data EMWS1.Trans_TRAIN / view=EMWS1.Trans_TRAIN ;
+97000      set EMWS1.Repl_TRAIN
+97001      ;
+MPRINT(EM_DIAGRAM):   set EMWS1.Repl_TRAIN ;
+97002      %inc emflow;
+NOTE: %INCLUDE (level 1) file EMFLOW is file 
+      C:\Users\bteric01\Documents\Tutorials_Projects\Project_3\Workspaces\EMWS1\Trans\EMFLOWSCO
+      RE.sas.
+97003     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+97004     +* Computed Code;
+MPRINT(EM_DIAGRAM):   * Computed Code;
+97005     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+97006     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+97007     +* TRANSFORM: REP_clage , log(REP_clage + 1);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: REP_clage , log(REP_clage + 1);
+97008     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+97009     +label LOG_REP_clage = 'Transformed: Replacement: Age of oldest trade line in months'
+97009    !+;
+MPRINT(EM_DIAGRAM):   label LOG_REP_clage = 'Transformed: Replacement: Age of oldest trade 
+line in months';
+97010     +if REP_clage eq . then LOG_REP_clage = .;
+MPRINT(EM_DIAGRAM):   if REP_clage eq . then LOG_REP_clage = .;
+97011     +else do;
+MPRINT(EM_DIAGRAM):   else do;
+97012     +if REP_clage + 1 > 0 then LOG_REP_clage = log(REP_clage + 1);
+MPRINT(EM_DIAGRAM):   if REP_clage + 1 > 0 then LOG_REP_clage = log(REP_clage + 1);
+97013     +else LOG_REP_clage = .;
+MPRINT(EM_DIAGRAM):   else LOG_REP_clage = .;
+97014     +end;
+MPRINT(EM_DIAGRAM):   end;
+97015     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+97016     +* TRANSFORM: REP_clno , log(REP_clno + 1);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: REP_clno , log(REP_clno + 1);
+97017     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+97018     +label LOG_REP_clno = 'Transformed: Replacement: Number of trade (credit) lines';
+MPRINT(EM_DIAGRAM):   label LOG_REP_clno = 'Transformed: Replacement: Number of trade (credit) 
+lines';
+97019     +if REP_clno eq . then LOG_REP_clno = .;
+MPRINT(EM_DIAGRAM):   if REP_clno eq . then LOG_REP_clno = .;
+97020     +else do;
+MPRINT(EM_DIAGRAM):   else do;
+97021     +if REP_clno + 1 > 0 then LOG_REP_clno = log(REP_clno + 1);
+MPRINT(EM_DIAGRAM):   if REP_clno + 1 > 0 then LOG_REP_clno = log(REP_clno + 1);
+97022     +else LOG_REP_clno = .;
+MPRINT(EM_DIAGRAM):   else LOG_REP_clno = .;
+97023     +end;
+MPRINT(EM_DIAGRAM):   end;
+97024     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+97025     +* TRANSFORM: REP_debtinc , log(REP_debtinc + 1);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: REP_debtinc , log(REP_debtinc + 1);
+97026     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+97027     +label LOG_REP_debtinc = 'Transformed: Replacement: Debt to income ratio';
+MPRINT(EM_DIAGRAM):   label LOG_REP_debtinc = 'Transformed: Replacement: Debt to income ratio';
+97028     +if REP_debtinc eq . then LOG_REP_debtinc = .;
+MPRINT(EM_DIAGRAM):   if REP_debtinc eq . then LOG_REP_debtinc = .;
+97029     +else do;
+MPRINT(EM_DIAGRAM):   else do;
+97030     +if REP_debtinc + 1 > 0 then LOG_REP_debtinc = log(REP_debtinc + 1);
+MPRINT(EM_DIAGRAM):   if REP_debtinc + 1 > 0 then LOG_REP_debtinc = log(REP_debtinc + 1);
+97031     +else LOG_REP_debtinc = .;
+MPRINT(EM_DIAGRAM):   else LOG_REP_debtinc = .;
+97032     +end;
+MPRINT(EM_DIAGRAM):   end;
+97033     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+97034     +* TRANSFORM: REP_delinq , log(REP_delinq + 1);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: REP_delinq , log(REP_delinq + 1);
+97035     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+97036     +label LOG_REP_delinq = 'Transformed: Replacement: Number of delinquent trade lines';
+MPRINT(EM_DIAGRAM):   label LOG_REP_delinq = 'Transformed: Replacement: Number of delinquent 
+trade lines';
+97037     +if REP_delinq eq . then LOG_REP_delinq = .;
+MPRINT(EM_DIAGRAM):   if REP_delinq eq . then LOG_REP_delinq = .;
+97038     +else do;
+MPRINT(EM_DIAGRAM):   else do;
+97039     +if REP_delinq + 1 > 0 then LOG_REP_delinq = log(REP_delinq + 1);
+MPRINT(EM_DIAGRAM):   if REP_delinq + 1 > 0 then LOG_REP_delinq = log(REP_delinq + 1);
+97040     +else LOG_REP_delinq = .;
+MPRINT(EM_DIAGRAM):   else LOG_REP_delinq = .;
+97041     +end;
+MPRINT(EM_DIAGRAM):   end;
+97042     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+97043     +* TRANSFORM: REP_derog , log(REP_derog + 1);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: REP_derog , log(REP_derog + 1);
+97044     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+97045     +label LOG_REP_derog = 'Transformed: Replacement: Number of major derogatory reports'
+97045    !+;
+MPRINT(EM_DIAGRAM):   label LOG_REP_derog = 'Transformed: Replacement: Number of major 
+derogatory reports';
+97046     +if REP_derog eq . then LOG_REP_derog = .;
+MPRINT(EM_DIAGRAM):   if REP_derog eq . then LOG_REP_derog = .;
+97047     +else do;
+MPRINT(EM_DIAGRAM):   else do;
+97048     +if REP_derog + 1 > 0 then LOG_REP_derog = log(REP_derog + 1);
+MPRINT(EM_DIAGRAM):   if REP_derog + 1 > 0 then LOG_REP_derog = log(REP_derog + 1);
+97049     +else LOG_REP_derog = .;
+MPRINT(EM_DIAGRAM):   else LOG_REP_derog = .;
+97050     +end;
+MPRINT(EM_DIAGRAM):   end;
+97051     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+97052     +* TRANSFORM: REP_loan , log(REP_loan + 1);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: REP_loan , log(REP_loan + 1);
+97053     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+97054     +label LOG_REP_loan = 'Transformed: Replacement: Amount of current loan request';
+MPRINT(EM_DIAGRAM):   label LOG_REP_loan = 'Transformed: Replacement: Amount of current loan 
+request';
+97055     +if REP_loan eq . then LOG_REP_loan = .;
+MPRINT(EM_DIAGRAM):   if REP_loan eq . then LOG_REP_loan = .;
+97056     +else do;
+MPRINT(EM_DIAGRAM):   else do;
+97057     +if REP_loan + 1 > 0 then LOG_REP_loan = log(REP_loan + 1);
+MPRINT(EM_DIAGRAM):   if REP_loan + 1 > 0 then LOG_REP_loan = log(REP_loan + 1);
+97058     +else LOG_REP_loan = .;
+MPRINT(EM_DIAGRAM):   else LOG_REP_loan = .;
+97059     +end;
+MPRINT(EM_DIAGRAM):   end;
+97060     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+97061     +* TRANSFORM: REP_mortdue , log(REP_mortdue + 1);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: REP_mortdue , log(REP_mortdue + 1);
+97062     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+97063     +label LOG_REP_mortdue = 'Transformed: Replacement: Amount due on existing mortgage';
+MPRINT(EM_DIAGRAM):   label LOG_REP_mortdue = 'Transformed: Replacement: Amount due on 
+existing mortgage';
+97064     +if REP_mortdue eq . then LOG_REP_mortdue = .;
+MPRINT(EM_DIAGRAM):   if REP_mortdue eq . then LOG_REP_mortdue = .;
+97065     +else do;
+MPRINT(EM_DIAGRAM):   else do;
+97066     +if REP_mortdue + 1 > 0 then LOG_REP_mortdue = log(REP_mortdue + 1);
+MPRINT(EM_DIAGRAM):   if REP_mortdue + 1 > 0 then LOG_REP_mortdue = log(REP_mortdue + 1);
+97067     +else LOG_REP_mortdue = .;
+MPRINT(EM_DIAGRAM):   else LOG_REP_mortdue = .;
+97068     +end;
+MPRINT(EM_DIAGRAM):   end;
+97069     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+97070     +* TRANSFORM: REP_ninq , log(REP_ninq + 1);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: REP_ninq , log(REP_ninq + 1);
+97071     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+97072     +label LOG_REP_ninq = 'Transformed: Replacement: Number of recent credit inquiries';
+MPRINT(EM_DIAGRAM):   label LOG_REP_ninq = 'Transformed: Replacement: Number of recent credit 
+inquiries';
+97073     +if REP_ninq eq . then LOG_REP_ninq = .;
+MPRINT(EM_DIAGRAM):   if REP_ninq eq . then LOG_REP_ninq = .;
+97074     +else do;
+MPRINT(EM_DIAGRAM):   else do;
+97075     +if REP_ninq + 1 > 0 then LOG_REP_ninq = log(REP_ninq + 1);
+MPRINT(EM_DIAGRAM):   if REP_ninq + 1 > 0 then LOG_REP_ninq = log(REP_ninq + 1);
+97076     +else LOG_REP_ninq = .;
+MPRINT(EM_DIAGRAM):   else LOG_REP_ninq = .;
+97077     +end;
+MPRINT(EM_DIAGRAM):   end;
+97078     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+97079     +* TRANSFORM: REP_value , log(REP_value + 1);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: REP_value , log(REP_value + 1);
+97080     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+97081     +label LOG_REP_value = 'Transformed: Replacement: Value of current property';
+MPRINT(EM_DIAGRAM):   label LOG_REP_value = 'Transformed: Replacement: Value of current 
+property';
+97082     +if REP_value eq . then LOG_REP_value = .;
+MPRINT(EM_DIAGRAM):   if REP_value eq . then LOG_REP_value = .;
+97083     +else do;
+MPRINT(EM_DIAGRAM):   else do;
+97084     +if REP_value + 1 > 0 then LOG_REP_value = log(REP_value + 1);
+MPRINT(EM_DIAGRAM):   if REP_value + 1 > 0 then LOG_REP_value = log(REP_value + 1);
+97085     +else LOG_REP_value = .;
+MPRINT(EM_DIAGRAM):   else LOG_REP_value = .;
+97086     +end;
+MPRINT(EM_DIAGRAM):   end;
+97087     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+97088     +* TRANSFORM: REP_yoj , log(REP_yoj + 1);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: REP_yoj , log(REP_yoj + 1);
+97089     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+97090     +label LOG_REP_yoj = 'Transformed: Replacement: Years on current job';
+MPRINT(EM_DIAGRAM):   label LOG_REP_yoj = 'Transformed: Replacement: Years on current job';
+97091     +if REP_yoj eq . then LOG_REP_yoj = .;
+MPRINT(EM_DIAGRAM):   if REP_yoj eq . then LOG_REP_yoj = .;
+97092     +else do;
+MPRINT(EM_DIAGRAM):   else do;
+97093     +if REP_yoj + 1 > 0 then LOG_REP_yoj = log(REP_yoj + 1);
+MPRINT(EM_DIAGRAM):   if REP_yoj + 1 > 0 then LOG_REP_yoj = log(REP_yoj + 1);
+97094     +else LOG_REP_yoj = .;
+MPRINT(EM_DIAGRAM):   else LOG_REP_yoj = .;
+97095     +end;
+MPRINT(EM_DIAGRAM):   end;
+97096     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+97097     +* TRANSFORM: yoj , log(yoj + 1);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: yoj , log(yoj + 1);
+97098     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+97099     +label LOG_yoj = 'Transformed: Years on current job';
+MPRINT(EM_DIAGRAM):   label LOG_yoj = 'Transformed: Years on current job';
+97100     +if yoj eq . then LOG_yoj = .;
+MPRINT(EM_DIAGRAM):   if yoj eq . then LOG_yoj = .;
+97101     +else do;
+MPRINT(EM_DIAGRAM):   else do;
+97102     +if yoj + 1 > 0 then LOG_yoj = log(yoj + 1);
+MPRINT(EM_DIAGRAM):   if yoj + 1 > 0 then LOG_yoj = log(yoj + 1);
+97103     +else LOG_yoj = .;
+MPRINT(EM_DIAGRAM):   else LOG_yoj = .;
+97104     +end;
+MPRINT(EM_DIAGRAM):   end;
+NOTE: %INCLUDE (level 1) ending.
+MPRINT(EM_DIAGRAM):   run;
+97105      run;
+
+NOTE: DATA STEP view saved on file EMWS1.TRANS_TRAIN.
+NOTE: A stored DATA STEP view cannot run under a different operating system.
+NOTE: View EMWS1.REPL_TRAIN.VIEW used (Total process time):
+      real time           0.04 seconds
+      cpu time            0.04 seconds
+      
+NOTE: DATA statement used (Total process time):
+      real time           0.06 seconds
+      cpu time            0.06 seconds
+      
+
+MPRINT(EM_DIAGRAM):   quit;
+97106      quit;
+97107      filename emflow;
+MPRINT(EM_DIAGRAM):   filename emflow;
+NOTE: Fileref EMFLOW has been deassigned.
+97108      filename emflow
+97108    ! "C:\Users\bteric01\Documents\Tutorials_Projects\Project_3\Workspaces\EMWS1\Trans\EMF
+97108    ! LOWSCORE.sas";
+MPRINT(EM_DIAGRAM):    filename emflow 
+"C:\Users\bteric01\Documents\Tutorials_Projects\Project_3\Workspaces\EMWS1\Trans\EMFLOWSCORE.sa
+s";
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   * Trans: Scoring VALIDATE data;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+97109      *------------------------------------------------------------*;
+97110      * Trans: Scoring VALIDATE data;
+97111      *------------------------------------------------------------*;
+97112      data EMWS1.Trans_VALIDATE
+97113      / view=EMWS1.Trans_VALIDATE
+97114      ;
+MPRINT(EM_DIAGRAM):   data EMWS1.Trans_VALIDATE / view=EMWS1.Trans_VALIDATE ;
+97115      set EMWS1.Repl_VALIDATE
+97116      ;
+MPRINT(EM_DIAGRAM):   set EMWS1.Repl_VALIDATE ;
+97117      %inc emflow;
+NOTE: %INCLUDE (level 1) file EMFLOW is file 
+      C:\Users\bteric01\Documents\Tutorials_Projects\Project_3\Workspaces\EMWS1\Trans\EMFLOWSCO
+      RE.sas.
+97118     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+97119     +* Computed Code;
+MPRINT(EM_DIAGRAM):   * Computed Code;
+97120     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+97121     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+97122     +* TRANSFORM: REP_clage , log(REP_clage + 1);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: REP_clage , log(REP_clage + 1);
+97123     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+97124     +label LOG_REP_clage = 'Transformed: Replacement: Age of oldest trade line in months'
+97124    !+;
+MPRINT(EM_DIAGRAM):   label LOG_REP_clage = 'Transformed: Replacement: Age of oldest trade 
+line in months';
+97125     +if REP_clage eq . then LOG_REP_clage = .;
+MPRINT(EM_DIAGRAM):   if REP_clage eq . then LOG_REP_clage = .;
+97126     +else do;
+MPRINT(EM_DIAGRAM):   else do;
+97127     +if REP_clage + 1 > 0 then LOG_REP_clage = log(REP_clage + 1);
+MPRINT(EM_DIAGRAM):   if REP_clage + 1 > 0 then LOG_REP_clage = log(REP_clage + 1);
+97128     +else LOG_REP_clage = .;
+MPRINT(EM_DIAGRAM):   else LOG_REP_clage = .;
+97129     +end;
+MPRINT(EM_DIAGRAM):   end;
+97130     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+97131     +* TRANSFORM: REP_clno , log(REP_clno + 1);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: REP_clno , log(REP_clno + 1);
+97132     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+97133     +label LOG_REP_clno = 'Transformed: Replacement: Number of trade (credit) lines';
+MPRINT(EM_DIAGRAM):   label LOG_REP_clno = 'Transformed: Replacement: Number of trade (credit) 
+lines';
+97134     +if REP_clno eq . then LOG_REP_clno = .;
+MPRINT(EM_DIAGRAM):   if REP_clno eq . then LOG_REP_clno = .;
+97135     +else do;
+MPRINT(EM_DIAGRAM):   else do;
+97136     +if REP_clno + 1 > 0 then LOG_REP_clno = log(REP_clno + 1);
+MPRINT(EM_DIAGRAM):   if REP_clno + 1 > 0 then LOG_REP_clno = log(REP_clno + 1);
+97137     +else LOG_REP_clno = .;
+MPRINT(EM_DIAGRAM):   else LOG_REP_clno = .;
+97138     +end;
+MPRINT(EM_DIAGRAM):   end;
+97139     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+97140     +* TRANSFORM: REP_debtinc , log(REP_debtinc + 1);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: REP_debtinc , log(REP_debtinc + 1);
+97141     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+97142     +label LOG_REP_debtinc = 'Transformed: Replacement: Debt to income ratio';
+MPRINT(EM_DIAGRAM):   label LOG_REP_debtinc = 'Transformed: Replacement: Debt to income ratio';
+97143     +if REP_debtinc eq . then LOG_REP_debtinc = .;
+MPRINT(EM_DIAGRAM):   if REP_debtinc eq . then LOG_REP_debtinc = .;
+97144     +else do;
+MPRINT(EM_DIAGRAM):   else do;
+97145     +if REP_debtinc + 1 > 0 then LOG_REP_debtinc = log(REP_debtinc + 1);
+MPRINT(EM_DIAGRAM):   if REP_debtinc + 1 > 0 then LOG_REP_debtinc = log(REP_debtinc + 1);
+97146     +else LOG_REP_debtinc = .;
+MPRINT(EM_DIAGRAM):   else LOG_REP_debtinc = .;
+97147     +end;
+MPRINT(EM_DIAGRAM):   end;
+97148     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+97149     +* TRANSFORM: REP_delinq , log(REP_delinq + 1);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: REP_delinq , log(REP_delinq + 1);
+97150     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+97151     +label LOG_REP_delinq = 'Transformed: Replacement: Number of delinquent trade lines';
+MPRINT(EM_DIAGRAM):   label LOG_REP_delinq = 'Transformed: Replacement: Number of delinquent 
+trade lines';
+97152     +if REP_delinq eq . then LOG_REP_delinq = .;
+MPRINT(EM_DIAGRAM):   if REP_delinq eq . then LOG_REP_delinq = .;
+97153     +else do;
+MPRINT(EM_DIAGRAM):   else do;
+97154     +if REP_delinq + 1 > 0 then LOG_REP_delinq = log(REP_delinq + 1);
+MPRINT(EM_DIAGRAM):   if REP_delinq + 1 > 0 then LOG_REP_delinq = log(REP_delinq + 1);
+97155     +else LOG_REP_delinq = .;
+MPRINT(EM_DIAGRAM):   else LOG_REP_delinq = .;
+97156     +end;
+MPRINT(EM_DIAGRAM):   end;
+97157     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+97158     +* TRANSFORM: REP_derog , log(REP_derog + 1);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: REP_derog , log(REP_derog + 1);
+97159     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+97160     +label LOG_REP_derog = 'Transformed: Replacement: Number of major derogatory reports'
+97160    !+;
+MPRINT(EM_DIAGRAM):   label LOG_REP_derog = 'Transformed: Replacement: Number of major 
+derogatory reports';
+97161     +if REP_derog eq . then LOG_REP_derog = .;
+MPRINT(EM_DIAGRAM):   if REP_derog eq . then LOG_REP_derog = .;
+97162     +else do;
+MPRINT(EM_DIAGRAM):   else do;
+97163     +if REP_derog + 1 > 0 then LOG_REP_derog = log(REP_derog + 1);
+MPRINT(EM_DIAGRAM):   if REP_derog + 1 > 0 then LOG_REP_derog = log(REP_derog + 1);
+97164     +else LOG_REP_derog = .;
+MPRINT(EM_DIAGRAM):   else LOG_REP_derog = .;
+97165     +end;
+MPRINT(EM_DIAGRAM):   end;
+97166     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+97167     +* TRANSFORM: REP_loan , log(REP_loan + 1);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: REP_loan , log(REP_loan + 1);
+97168     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+97169     +label LOG_REP_loan = 'Transformed: Replacement: Amount of current loan request';
+MPRINT(EM_DIAGRAM):   label LOG_REP_loan = 'Transformed: Replacement: Amount of current loan 
+request';
+97170     +if REP_loan eq . then LOG_REP_loan = .;
+MPRINT(EM_DIAGRAM):   if REP_loan eq . then LOG_REP_loan = .;
+97171     +else do;
+MPRINT(EM_DIAGRAM):   else do;
+97172     +if REP_loan + 1 > 0 then LOG_REP_loan = log(REP_loan + 1);
+MPRINT(EM_DIAGRAM):   if REP_loan + 1 > 0 then LOG_REP_loan = log(REP_loan + 1);
+97173     +else LOG_REP_loan = .;
+MPRINT(EM_DIAGRAM):   else LOG_REP_loan = .;
+97174     +end;
+MPRINT(EM_DIAGRAM):   end;
+97175     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+97176     +* TRANSFORM: REP_mortdue , log(REP_mortdue + 1);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: REP_mortdue , log(REP_mortdue + 1);
+97177     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+97178     +label LOG_REP_mortdue = 'Transformed: Replacement: Amount due on existing mortgage';
+MPRINT(EM_DIAGRAM):   label LOG_REP_mortdue = 'Transformed: Replacement: Amount due on 
+existing mortgage';
+97179     +if REP_mortdue eq . then LOG_REP_mortdue = .;
+MPRINT(EM_DIAGRAM):   if REP_mortdue eq . then LOG_REP_mortdue = .;
+97180     +else do;
+MPRINT(EM_DIAGRAM):   else do;
+97181     +if REP_mortdue + 1 > 0 then LOG_REP_mortdue = log(REP_mortdue + 1);
+MPRINT(EM_DIAGRAM):   if REP_mortdue + 1 > 0 then LOG_REP_mortdue = log(REP_mortdue + 1);
+97182     +else LOG_REP_mortdue = .;
+MPRINT(EM_DIAGRAM):   else LOG_REP_mortdue = .;
+97183     +end;
+MPRINT(EM_DIAGRAM):   end;
+97184     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+97185     +* TRANSFORM: REP_ninq , log(REP_ninq + 1);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: REP_ninq , log(REP_ninq + 1);
+97186     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+97187     +label LOG_REP_ninq = 'Transformed: Replacement: Number of recent credit inquiries';
+MPRINT(EM_DIAGRAM):   label LOG_REP_ninq = 'Transformed: Replacement: Number of recent credit 
+inquiries';
+97188     +if REP_ninq eq . then LOG_REP_ninq = .;
+MPRINT(EM_DIAGRAM):   if REP_ninq eq . then LOG_REP_ninq = .;
+97189     +else do;
+MPRINT(EM_DIAGRAM):   else do;
+97190     +if REP_ninq + 1 > 0 then LOG_REP_ninq = log(REP_ninq + 1);
+MPRINT(EM_DIAGRAM):   if REP_ninq + 1 > 0 then LOG_REP_ninq = log(REP_ninq + 1);
+97191     +else LOG_REP_ninq = .;
+MPRINT(EM_DIAGRAM):   else LOG_REP_ninq = .;
+97192     +end;
+MPRINT(EM_DIAGRAM):   end;
+97193     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+97194     +* TRANSFORM: REP_value , log(REP_value + 1);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: REP_value , log(REP_value + 1);
+97195     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+97196     +label LOG_REP_value = 'Transformed: Replacement: Value of current property';
+MPRINT(EM_DIAGRAM):   label LOG_REP_value = 'Transformed: Replacement: Value of current 
+property';
+97197     +if REP_value eq . then LOG_REP_value = .;
+MPRINT(EM_DIAGRAM):   if REP_value eq . then LOG_REP_value = .;
+97198     +else do;
+MPRINT(EM_DIAGRAM):   else do;
+97199     +if REP_value + 1 > 0 then LOG_REP_value = log(REP_value + 1);
+MPRINT(EM_DIAGRAM):   if REP_value + 1 > 0 then LOG_REP_value = log(REP_value + 1);
+97200     +else LOG_REP_value = .;
+MPRINT(EM_DIAGRAM):   else LOG_REP_value = .;
+97201     +end;
+MPRINT(EM_DIAGRAM):   end;
+97202     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+97203     +* TRANSFORM: REP_yoj , log(REP_yoj + 1);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: REP_yoj , log(REP_yoj + 1);
+97204     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+97205     +label LOG_REP_yoj = 'Transformed: Replacement: Years on current job';
+MPRINT(EM_DIAGRAM):   label LOG_REP_yoj = 'Transformed: Replacement: Years on current job';
+97206     +if REP_yoj eq . then LOG_REP_yoj = .;
+MPRINT(EM_DIAGRAM):   if REP_yoj eq . then LOG_REP_yoj = .;
+97207     +else do;
+MPRINT(EM_DIAGRAM):   else do;
+97208     +if REP_yoj + 1 > 0 then LOG_REP_yoj = log(REP_yoj + 1);
+MPRINT(EM_DIAGRAM):   if REP_yoj + 1 > 0 then LOG_REP_yoj = log(REP_yoj + 1);
+97209     +else LOG_REP_yoj = .;
+MPRINT(EM_DIAGRAM):   else LOG_REP_yoj = .;
+97210     +end;
+MPRINT(EM_DIAGRAM):   end;
+97211     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+97212     +* TRANSFORM: yoj , log(yoj + 1);
+MPRINT(EM_DIAGRAM):   * TRANSFORM: yoj , log(yoj + 1);
+97213     +*------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+97214     +label LOG_yoj = 'Transformed: Years on current job';
+MPRINT(EM_DIAGRAM):   label LOG_yoj = 'Transformed: Years on current job';
+97215     +if yoj eq . then LOG_yoj = .;
+MPRINT(EM_DIAGRAM):   if yoj eq . then LOG_yoj = .;
+97216     +else do;
+MPRINT(EM_DIAGRAM):   else do;
+97217     +if yoj + 1 > 0 then LOG_yoj = log(yoj + 1);
+MPRINT(EM_DIAGRAM):   if yoj + 1 > 0 then LOG_yoj = log(yoj + 1);
+97218     +else LOG_yoj = .;
+MPRINT(EM_DIAGRAM):   else LOG_yoj = .;
+97219     +end;
+MPRINT(EM_DIAGRAM):   end;
+NOTE: %INCLUDE (level 1) ending.
+MPRINT(EM_DIAGRAM):   run;
+97220      run;
+
+NOTE: DATA STEP view saved on file EMWS1.TRANS_VALIDATE.
+NOTE: A stored DATA STEP view cannot run under a different operating system.
+NOTE: View EMWS1.REPL_VALIDATE.VIEW used (Total process time):
+      real time           0.06 seconds
+      cpu time            0.06 seconds
+      
+NOTE: DATA statement used (Total process time):
+      real time           0.07 seconds
+      cpu time            0.07 seconds
+      
+
+MPRINT(EM_DIAGRAM):   quit;
+97221      quit;
+97222      filename emflow;
+MPRINT(EM_DIAGRAM):   filename emflow;
+NOTE: Fileref EMFLOW has been deassigned.
+97223      *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):    *------------------------------------------------------------*;
+97224      * Trans: Computing metadata for TRAIN data;
+MPRINT(EM_DIAGRAM):   * Trans: Computing metadata for TRAIN data;
+97225      *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+
+NOTE: View EMWS1.TRANS_TRAIN.VIEW used (Total process time):
+      real time           0.09 seconds
+      cpu time            0.09 seconds
+      
+MPRINT(EM_DIAGRAM):    *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   * &nodeid: Computing Metadata for TRAIN data;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   filename _delta 
+"C:\Users\bteric01\Documents\Tutorials_Projects\Project_3\Workspaces\EMWS1\Trans\CDELTA_TRAIN.s
+as";
+MPRINT(EMADVISECOLUMNS):   proc display c=sashelp.emmeta.advisecolumns.scl;
+MPRINT(EMADVISECOLUMNS):   run;
+MPRINT(EMADVISECOLUMNS):    options validvarname=any;
+MPRINT(EMADVISECOLUMNS):   proc contents data=EMWS1.Trans_TRAIN out=_tempAdvisor noprint;
+MPRINT(EMADVISECOLUMNS):   run;
+MPRINT(EMADVISECOLUMNS):   options validvarname=V7;
+MPRINT(EMADVISECOLUMNS):    data _null_;
+MPRINT(EMADVISECOLUMNS):   dsid = open('EMWS1.Trans_TRAIN');
+MPRINT(EMADVISECOLUMNS):   call symput('_dsidTable', strip(put(dsid, best.)));
+MPRINT(EMADVISECOLUMNS):   if dsid then do;
+MPRINT(EMADVISECOLUMNS):   call symput('_engineTable', attrc(dsid, 'ENGINE'));
+MPRINT(EMADVISECOLUMNS):   dsid = close(dsid);
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   run;
+MPRINT(EMADVISECOLUMNS):    proc contents data=EMWS1.Trans_TRAIN out=WORK.M3PXKHLI noprint;
+MPRINT(EMADVISECOLUMNS):   run;
+MPRINT(EMADVISECOLUMNS):    data WORK.M3PXKHLI;
+MPRINT(EMADVISECOLUMNS):   length NAME $ 64 TYPE $ 1 LABEL $ 200 FORMAT $ 36 INFORMAT $36 
+INDEX $ 1 INDEXTYPE $ 9;
+MPRINT(EMADVISECOLUMNS):   label NAME =;
+MPRINT(EMADVISECOLUMNS):   set WORK.M3PXKHLI(keep=name type length label format formatl 
+formatd informat informl informd idxusage rename=(type=itype));
+MPRINT(EMADVISECOLUMNS):   if itype = 1 then type = 'N';
+MPRINT(EMADVISECOLUMNS):   else type = 'C';
+MPRINT(EMADVISECOLUMNS):   if formatl > 0 then do;
+MPRINT(EMADVISECOLUMNS):   if format ne ' ' then format = strip(format)!!strip(put(formatl, 
+best12.))!!'.'!!strip(put(formatd, best12.));
+MPRINT(EMADVISECOLUMNS):   else format = strip(put(formatl, best12.))!!'.'!!strip(put(formatd, 
+best12.));
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   else if format ne '' then format = strip(format)!!'.';
+MPRINT(EMADVISECOLUMNS):   if informl > 0 then do;
+MPRINT(EMADVISECOLUMNS):   if informat ne ' ' then informat = 
+strip(informat)!!strip(put(informl, best12.))!!'.'!!strip(put(informd, best12.));
+MPRINT(EMADVISECOLUMNS):   else informat = strip(put(informl, 
+best12.))!!'.'!!strip(put(informd, best12.));
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   else if informat ne '' then informat = strip(informat)!!'.';
+MPRINT(EMADVISECOLUMNS):   if idxusage = 'NONE' then index ="N";
+MPRINT(EMADVISECOLUMNS):   else index = "Y";
+MPRINT(EMADVISECOLUMNS):   indextype = idxusage;
+MPRINT(EMADVISECOLUMNS):   drop idxusage itype formatl formatd informl informd;
+MPRINT(EMADVISECOLUMNS):   run;
+MPRINT(EMADVISECOLUMNS):    data WORK.M3PXKHLI;
+MPRINT(EMADVISECOLUMNS):   length UNAME $64;
+MPRINT(EMADVISECOLUMNS):   set WORK.M3PXKHLI;
+MPRINT(EMADVISECOLUMNS):   UNAME = upcase(NAME);
+MPRINT(EMADVISECOLUMNS):   run;
+MPRINT(EMADVISECOLUMNS):    proc sort data=WORK.M3LRMS36 NOTHREADS;
+MPRINT(EMADVISECOLUMNS):   by UNAME;
+MPRINT(EMADVISECOLUMNS):   run;
+MPRINT(EMADVISECOLUMNS):    data WORK.M3LRMS36;
+MPRINT(EMADVISECOLUMNS):   drop UNAME;
+MPRINT(EMADVISECOLUMNS):   set WORK.M3LRMS36;
+MPRINT(EMADVISECOLUMNS):   run;
+MPRINT(EMADVISECOLUMNS):    data WORK.M3MFYXLK(keep=NAME ATTR);
+MPRINT(EMADVISECOLUMNS):   length ATTR $ 20;
+MPRINT(EMADVISECOLUMNS):   set WORK.M3LRMS36;
+MPRINT(EMADVISECOLUMNS):   if level ne "INTERVAL" then do;
+MPRINT(EMADVISECOLUMNS):   if order = ' ' then do;
+MPRINT(EMADVISECOLUMNS):   attr = 'ORDER';
+MPRINT(EMADVISECOLUMNS):   output;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   if format ne ' ' and formattype = ' ' then do;
+MPRINT(EMADVISECOLUMNS):   attr = 'FORMATTYPE';
+MPRINT(EMADVISECOLUMNS):   output;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   if role = ' ' then do;
+MPRINT(EMADVISECOLUMNS):   attr = 'ROLE';
+MPRINT(EMADVISECOLUMNS):   output;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   if level = ' ' then do;
+MPRINT(EMADVISECOLUMNS):   attr = 'LEVEL';
+MPRINT(EMADVISECOLUMNS):   output;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   if type = ' ' then do;
+MPRINT(EMADVISECOLUMNS):   attr = 'TYPE';
+MPRINT(EMADVISECOLUMNS):   output;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   if index = ' ' then do;
+MPRINT(EMADVISECOLUMNS):   attr = 'INDEX';
+MPRINT(EMADVISECOLUMNS):   output;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   if report = ' ' then do;
+MPRINT(EMADVISECOLUMNS):   attr = 'REPORT';
+MPRINT(EMADVISECOLUMNS):   output;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   run;
+MPRINT(EMADVISECOLUMNS):   proc sort NOTHREADS;
+MPRINT(EMADVISECOLUMNS):   by attr;
+MPRINT(EMADVISECOLUMNS):   run;
+MPRINT(EMADVISECOLUMNS):    data WORK.M3LRMS36;
+MPRINT(EMADVISECOLUMNS):   length NAME $64 ROLE $ 32 LEVEL $ 10 ORDER $ 8 CREATOR $32 
+FORMATTYPE $ 10 FAMILY $ 10 LOWERLIMIT 8 UPPERLIMIT 8 REPORT $1 DISTRIBUTION $ 20 COMMENT $64;
+MPRINT(EMADVISECOLUMNS):   length levelAssigned 8 roleAssigned 8 PRICE 8;
+MPRINT(EMADVISECOLUMNS):   set WORK.M3LRMS36;
+MPRINT(EMADVISECOLUMNS):   if formattype = ' ' then do;
+MPRINT(EMADVISECOLUMNS):   if format ne ' ' then do;
+MPRINT(EMADVISECOLUMNS):   if type = 'N' then do;
+MPRINT(EMADVISECOLUMNS):   pos = indexc(format,'.1234567890');
+MPRINT(EMADVISECOLUMNS):   if pos > 1 then tempfmt = substr(format,1, pos-1);
+MPRINT(EMADVISECOLUMNS):   else tempfmt = ' ';
+MPRINT(EMADVISECOLUMNS):   flen = length(tempfmt);
+MPRINT(EMADVISECOLUMNS):   select;
+MPRINT(EMADVISECOLUMNS):   when(tempfmt in ("DATE" "DAY" "DDMMYY" "DOWNAME" "JULDAY" "JULIAN" 
+"MMDDYY" "MMDDYYD" "MMDDYYC" "MMDDYYN" "MMDDYYP" "MMDDYYS" "MONNAME" "MONTH" "MONYY" "NENGO" 
+"QTR" "QTRR" "WEEKDATE" "WEEKDATX" "WEEKDAY" "WORDDATE" "WORDDATX" "YEAR" "YYMMDD" "YYMON" 
+"YYMMDDC" "YYMMDDD" "YYMMDDN" "YYMMDDP" "YYMMDDS" "EURDFDE" "NJDATE" "NLDATE" "EURDFDD" 
+"EURDFDWN" "EURDFMN" "EURDFMY" "EURDFWK" "EURDFWKX" "EURDFWDX" "EURDFDN" "EURDFDE" )) 
+formattype = 'DATE';
+MPRINT(EMADVISECOLUMNS):   when(tempfmt in ("DATETIME" "EURDFDT" "TOD" )) formattype = 
+"DATETIME";
+MPRINT(EMADVISECOLUMNS):   when(tempfmt in ("HHMM" "HOUR" "MMSS" "TIME" "TIMEAMPM" )) 
+formattype = "TIME";
+MPRINT(EMADVISECOLUMNS):   when(tempfmt in ("COMMA" "COMMAX" "DOLLAR" "DOLLARX" "E" "FRACT" 
+"NEGPAREN" "PERCENT")) formattype="QUANTITY";
+MPRINT(EMADVISECOLUMNS):   when(tempfmt in ("BINARY" "HEX" "IB" "OCTAL" "PD" "PIB" "PK" "RB" 
+"SSN" "Z" "ZD")) formattype = "CODING";
+MPRINT(EMADVISECOLUMNS):   otherwise do;
+MPRINT(EMADVISECOLUMNS):   formattype = "USER";
+MPRINT(EMADVISECOLUMNS):   if substr(tempfmt, 1, 6)='NLDATE' then formattype = "DATE";
+MPRINT(EMADVISECOLUMNS):   else if substr(tempfmt, 1, 6)='NLDATM' then formattype = "DATETIME";
+MPRINT(EMADVISECOLUMNS):   else if substr(tempfmt, 1, 4)='NLTIM' then formattype = "TIME";
+MPRINT(EMADVISECOLUMNS):   else if flen >= 4 then do;
+MPRINT(EMADVISECOLUMNS):   str = substr(tempfmt,1,4);
+MPRINT(EMADVISECOLUMNS):   if str in ("MMYY" "YYMM" "YYQR") then formattype ="DATE";
+MPRINT(EMADVISECOLUMNS):   else if str = "S370" then formattype = "CODING";
+MPRINT(EMADVISECOLUMNS):   else if str = "BEST" then formattype = "NUM";
+MPRINT(EMADVISECOLUMNS):   drop str;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   else if flen >=3 and substr(tempfmt,1,3) = "YYQ" then formatType = 
+"DATE";
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   drop flen tempfmt pos;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   else do;
+MPRINT(EMADVISECOLUMNS):   formatType = "CATEGORY";
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   if formatType = "NUM" then do;
+MPRINT(EMADVISECOLUMNS):   if index = "Y" then formatType = "DISCRETE";
+MPRINT(EMADVISECOLUMNS):   else formatType = "QUANTITY";
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   if level = ' ' then do;
+MPRINT(EMADVISECOLUMNS):   if formatType in ("CATEGORY", "CODING", "ID") or type = "C" then 
+level = "NOMINAL";
+MPRINT(EMADVISECOLUMNS):   else level = "INTERVAL";
+MPRINT(EMADVISECOLUMNS):   levelAssigned = 1;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   else level = upcase(level);
+MPRINT(EMADVISECOLUMNS):   if role = ' ' then do;
+MPRINT(EMADVISECOLUMNS):   length name_prefix $8 _uname $64;
+MPRINT(EMADVISECOLUMNS):   drop name_prefix _uname _freqflag;
+MPRINT(EMADVISECOLUMNS):   retain _freqflag;
+MPRINT(EMADVISECOLUMNS):   if LENGTH> 80 then ROLE = 'TEXT';
+MPRINT(EMADVISECOLUMNS):   _uname = upcase(NAME);
+MPRINT(EMADVISECOLUMNS):   select(_uname);
+MPRINT(EMADVISECOLUMNS):   when('_WARN_') ROLE = 'ASSESS';
+MPRINT(EMADVISECOLUMNS):   when('EM_SEGMENT') do;
+MPRINT(EMADVISECOLUMNS):   ROLE = 'SEGMENT';
+MPRINT(EMADVISECOLUMNS):   LEVEL = 'NOMINAL';
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   when('_NODE_') do;
+MPRINT(EMADVISECOLUMNS):   ROLE = 'SEGMENT';
+MPRINT(EMADVISECOLUMNS):   LEVEL = 'NOMINAL';
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   when('EM_CLASSTARGET') ROLE = 'ASSESS';
+MPRINT(EMADVISECOLUMNS):   when('EM_VALUETARGET') ROLE = 'ASSESS';
+MPRINT(EMADVISECOLUMNS):   when('EM_PREDICTION') ROLE = 'PREDICT';
+MPRINT(EMADVISECOLUMNS):   when('EM_PROBABILITY') ROLE = 'PREDICT';
+MPRINT(EMADVISECOLUMNS):   when('EM_EVENTPROBABILITY') ROLE = 'PREDICT';
+MPRINT(EMADVISECOLUMNS):   when('EM_CLASSIFICATION') ROLE = 'CLASSIFICATION';
+MPRINT(EMADVISECOLUMNS):   when('EM_DECISION') ROLE = 'DECISION';
+MPRINT(EMADVISECOLUMNS):   when('EM_PROFIT') ROLE = 'ASSESS';
+MPRINT(EMADVISECOLUMNS):   when('EM_LOSS') ROLE = 'ASSESS';
+MPRINT(EMADVISECOLUMNS):   when('EM_ROI') ROLE = 'ASSESS';
+MPRINT(EMADVISECOLUMNS):   when('URI') ROLE = 'URL';
+MPRINT(EMADVISECOLUMNS):   when('FILTERED') ROLE = 'TEXTLOC';
+MPRINT(EMADVISECOLUMNS):   otherwise do;
+MPRINT(EMADVISECOLUMNS):   if upcase(NAME) =: 'ZIP' then do;
+MPRINT(EMADVISECOLUMNS):   ROLE = 'REJECTED';
+MPRINT(EMADVISECOLUMNS):   LEVEL = 'NOMINAL';
+MPRINT(EMADVISECOLUMNS):   COMMENT = 'Rejected by: Exceed the maximum class level of %s';
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   else if upcase(NAME) in('FREQ', 'FREQUENCY') then do;
+MPRINT(EMADVISECOLUMNS):   ROLE = 'FREQ';
+MPRINT(EMADVISECOLUMNS):   if TYPE = 'C' then ROLE = 'INPUT';
+MPRINT(EMADVISECOLUMNS):   else if _freqflag =1 then ROLE='REJECTED';
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   else do;
+MPRINT(EMADVISECOLUMNS):   name_prefix = scan(_uname, 1, '_');
+MPRINT(EMADVISECOLUMNS):   if scan(_uname, 2, '_') = '' then name_prefix='';
+MPRINT(EMADVISECOLUMNS):   if name_prefix in('F', 'I', 'U') then do;
+MPRINT(EMADVISECOLUMNS):   ROLE = 'CLASSIFICATION';
+MPRINT(EMADVISECOLUMNS):   LEVEL = 'NOMINAL';
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   else if name_prefix in('P', 'V') then ROLE = 'PREDICT';
+MPRINT(EMADVISECOLUMNS):   else if name_prefix in('R', 'RS', 'RT', 'RD', 'RDS', 'RDT', 'RA', 
+'RAS', 'RAT') then ROLE = 'RESIDUAL';
+MPRINT(EMADVISECOLUMNS):   else if name_prefix ='D' then do;
+MPRINT(EMADVISECOLUMNS):   ROLE = 'DECISION';
+MPRINT(EMADVISECOLUMNS):   LEVEL = 'NOMINAL';
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   else if name_prefix ='B' then do;
+MPRINT(EMADVISECOLUMNS):   ROLE = 'SEGMENT';
+MPRINT(EMADVISECOLUMNS):   LEVEL = 'NOMINAL';
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   else if name_prefix in('EP', 'BP', 'CP', 'EL', 'CL', 'BL', 'W', 
+'ROI', 'IC') then ROLE = 'ASSESS';
+MPRINT(EMADVISECOLUMNS):   else do;
+MPRINT(EMADVISECOLUMNS):   array _ROLE_ (19) $32 _TEMPORARY_ 
+('ASSESS','CLASSIFICATION','CENSOR', 'COST', 'CROSSID', 'DECISION', 'ID','INPUT', 'LABEL', 
+'MISSING','PREDICT','REFERRER','REJECTED', 'RESIDUAL','SEGMENT', 'SEQUENCE','TARGET', 'TEXT', 
+'TIMEID');
+MPRINT(EMADVISECOLUMNS):   drop _found_ i;
+MPRINT(EMADVISECOLUMNS):   _found_=0;
+MPRINT(EMADVISECOLUMNS):   do i=1 to 19 until(_found_=1);
+MPRINT(EMADVISECOLUMNS):   if index(_uname, trim(_ROLE_{i}))=1 then do;
+MPRINT(EMADVISECOLUMNS):   ROLE=_ROLE_{i};
+MPRINT(EMADVISECOLUMNS):   if ROLE = 'ID' then LEVEL = 'NOMINAL';
+MPRINT(EMADVISECOLUMNS):   else if ROLE = 'SEGMENT' then LEVEL = 'NOMINAL';
+MPRINT(EMADVISECOLUMNS):   else if ROLE = 'TIMEID' and TYPE='N' then LEVEL = 'INTERVAL';
+MPRINT(EMADVISECOLUMNS):   _found_=1;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   if length(_uname)>2 then do;
+MPRINT(EMADVISECOLUMNS):   if substr(reverse(trim(_uname)), 1, 3) = 'DI_' then do;
+MPRINT(EMADVISECOLUMNS):   ROLE = 'ID';
+MPRINT(EMADVISECOLUMNS):   LEVEL = 'NOMINAL';
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   if ROLE='FREQ' then _freqflag=1;
+MPRINT(EMADVISECOLUMNS):   else if ROLE = 'CLASSIFICATION' then LEVEL = 'NOMINAL';
+MPRINT(EMADVISECOLUMNS):   if symexist('RATEMKG_ROLE') then do;
+MPRINT(EMADVISECOLUMNS):   if upcase(symget('RATEMKG_ROLE')) in('Y', 'YES') then do;
+MPRINT(EMADVISECOLUMNS):   if _uname =: 'POLICY' then ROLE = 'POLICYID';
+MPRINT(EMADVISECOLUMNS):   else if _uname in ('PARTITION', '_PARTIND_') then ROLE = 
+'PARTITION';
+MPRINT(EMADVISECOLUMNS):   else if type = 'N' then do;
+MPRINT(EMADVISECOLUMNS):   if _uname = 'EXPOSURE' then ROLE = 'EXPOSURE';
+MPRINT(EMADVISECOLUMNS):   else if _uname = 'YEAR' then ROLE = 'YEAR';
+MPRINT(EMADVISECOLUMNS):   else if _uname = 'WEIGHT' then ROLE = 'WEIGHT';
+MPRINT(EMADVISECOLUMNS):   else if _uname = 'OFFSET' then ROLE = 'OFFSET';
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   if role = ' ' then do;
+MPRINT(EMADVISECOLUMNS):   if formattype in('DATE', 'DATETIME', 'TIME') then role = 'TIMEID';
+MPRINT(EMADVISECOLUMNS):   else role = 'INPUT';
+MPRINT(EMADVISECOLUMNS):   roleAssigned = 1;
+MPRINT(EMADVISECOLUMNS):   end;
+MPRINT(EMADVISECOLUMNS):   else role = upcase(role);
+MPRINT(EMADVISECOLUMNS):   if REPORT = '' then REPORT = 'N';
+MPRINT(EMADVISECOLUMNS):   run;
+MPRINT(EMADVISECOLUMNS):    data WORK.M3LRMS36;
+MPRINT(EMADVISECOLUMNS):   set WORK.M3LRMS36;
+MPRINT(EMADVISECOLUMNS):   label NAME = "Variable Name" TYPE = "Type" ROLE = "Role" LEVEL= 
+"Measurement Level" ORDER= "Order" CREATOR= "Creator" FORMATTYPE= "Format Type" FAMILY= 
+"Family" DISTRIBUTION= "Distribution" PRICE= "Price" LOWERLIMIT= "Lower limit" UPPERLIMIT= 
+"Upper Limit" REPORT= "Report" COMMENT= "Comment" INDEX= "Index" INDEXTYPE= "IndexType" LABEL= 
+"Label" LENGTH= "Length";
+MPRINT(EMADVISECOLUMNS):   drop levelAssigned roleAssigned;
+MPRINT(EMADVISECOLUMNS):   run;
+MPRINT(EMADVISECOLUMNS):   
+MPRINT(EM_DIAGRAM):  ;
+MPRINT(EM_DIAGRAM):   proc sort data=WORK.COLUMNMETA;
+MPRINT(EM_DIAGRAM):   by NAME;
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   * &nodeid: Merge incoming metadata;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   proc contents data=EMWS1.Repl_TRAIN noprint out=_temp2(keep=NAME);
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):   proc sort data=_temp2;
+MPRINT(EM_DIAGRAM):   by NAME;
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):   proc sort data=EMWS1.Repl_CMeta_TRAIN out=_temp;
+MPRINT(EM_DIAGRAM):   by NAME;
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):   data EMWS1.Trans_CMeta_TRAIN;
+MPRINT(EM_DIAGRAM):   merge WORK.COLUMNMETA(in=_a) _temp2(in=_b) _temp(drop=FORMAT INFORMAT 
+LENGTH INDEX INDEXTYPE in=_c) end=_eof_;
+MPRINT(EM_DIAGRAM):   by NAME;
+MPRINT(EM_DIAGRAM):   if (^_a and _b) or (^_c and _a and _b) then delete;
+MPRINT(EM_DIAGRAM):   if ^_b then CREATOR = "Trans";
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   * Trans: Apply Delta Code;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   * Computed Code;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   if NAME="LOG_REP_clage" then do;
+MPRINT(EM_DIAGRAM):   COMMENT = "log(REP_clage  + 1) ";
+MPRINT(EM_DIAGRAM):   ROLE ="INPUT";
+MPRINT(EM_DIAGRAM):   REPORT ="N";
+MPRINT(EM_DIAGRAM):   LEVEL ="INTERVAL";
+MPRINT(EM_DIAGRAM):   end;
+MPRINT(EM_DIAGRAM):   if NAME="REP_clage" then delete;
+MPRINT(EM_DIAGRAM):   if NAME="LOG_REP_clno" then do;
+MPRINT(EM_DIAGRAM):   COMMENT = "log(REP_clno  + 1) ";
+MPRINT(EM_DIAGRAM):   ROLE ="INPUT";
+MPRINT(EM_DIAGRAM):   REPORT ="N";
+MPRINT(EM_DIAGRAM):   LEVEL ="INTERVAL";
+MPRINT(EM_DIAGRAM):   end;
+MPRINT(EM_DIAGRAM):   if NAME="REP_clno" then delete;
+MPRINT(EM_DIAGRAM):   if NAME="LOG_REP_debtinc" then do;
+MPRINT(EM_DIAGRAM):   COMMENT = "log(REP_debtinc  + 1) ";
+MPRINT(EM_DIAGRAM):   ROLE ="INPUT";
+MPRINT(EM_DIAGRAM):   REPORT ="N";
+MPRINT(EM_DIAGRAM):   LEVEL ="INTERVAL";
+MPRINT(EM_DIAGRAM):   end;
+MPRINT(EM_DIAGRAM):   if NAME="REP_debtinc" then delete;
+MPRINT(EM_DIAGRAM):   if NAME="LOG_REP_delinq" then do;
+MPRINT(EM_DIAGRAM):   COMMENT = "log(REP_delinq  + 1) ";
+MPRINT(EM_DIAGRAM):   ROLE ="INPUT";
+MPRINT(EM_DIAGRAM):   REPORT ="N";
+MPRINT(EM_DIAGRAM):   LEVEL ="INTERVAL";
+MPRINT(EM_DIAGRAM):   end;
+MPRINT(EM_DIAGRAM):   if NAME="REP_delinq" then delete;
+MPRINT(EM_DIAGRAM):   if NAME="LOG_REP_derog" then do;
+MPRINT(EM_DIAGRAM):   COMMENT = "log(REP_derog  + 1) ";
+MPRINT(EM_DIAGRAM):   ROLE ="INPUT";
+MPRINT(EM_DIAGRAM):   REPORT ="N";
+MPRINT(EM_DIAGRAM):   LEVEL ="INTERVAL";
+MPRINT(EM_DIAGRAM):   end;
+MPRINT(EM_DIAGRAM):   if NAME="REP_derog" then delete;
+MPRINT(EM_DIAGRAM):   if NAME="LOG_REP_loan" then do;
+MPRINT(EM_DIAGRAM):   COMMENT = "log(REP_loan  + 1) ";
+MPRINT(EM_DIAGRAM):   ROLE ="INPUT";
+MPRINT(EM_DIAGRAM):   REPORT ="N";
+MPRINT(EM_DIAGRAM):   LEVEL ="INTERVAL";
+MPRINT(EM_DIAGRAM):   end;
+MPRINT(EM_DIAGRAM):   if NAME="REP_loan" then delete;
+MPRINT(EM_DIAGRAM):   if NAME="LOG_REP_mortdue" then do;
+MPRINT(EM_DIAGRAM):   COMMENT = "log(REP_mortdue  + 1) ";
+MPRINT(EM_DIAGRAM):   ROLE ="INPUT";
+MPRINT(EM_DIAGRAM):   REPORT ="N";
+MPRINT(EM_DIAGRAM):   LEVEL ="INTERVAL";
+MPRINT(EM_DIAGRAM):   end;
+MPRINT(EM_DIAGRAM):   if NAME="REP_mortdue" then delete;
+MPRINT(EM_DIAGRAM):   if NAME="LOG_REP_ninq" then do;
+MPRINT(EM_DIAGRAM):   COMMENT = "log(REP_ninq  + 1) ";
+MPRINT(EM_DIAGRAM):   ROLE ="INPUT";
+MPRINT(EM_DIAGRAM):   REPORT ="N";
+MPRINT(EM_DIAGRAM):   LEVEL ="INTERVAL";
+MPRINT(EM_DIAGRAM):   end;
+MPRINT(EM_DIAGRAM):   if NAME="REP_ninq" then delete;
+MPRINT(EM_DIAGRAM):   if NAME="LOG_REP_value" then do;
+MPRINT(EM_DIAGRAM):   COMMENT = "log(REP_value  + 1) ";
+MPRINT(EM_DIAGRAM):   ROLE ="INPUT";
+MPRINT(EM_DIAGRAM):   REPORT ="N";
+MPRINT(EM_DIAGRAM):   LEVEL ="INTERVAL";
+MPRINT(EM_DIAGRAM):   end;
+MPRINT(EM_DIAGRAM):   if NAME="REP_value" then delete;
+MPRINT(EM_DIAGRAM):   if NAME="LOG_REP_yoj" then do;
+MPRINT(EM_DIAGRAM):   COMMENT = "log(REP_yoj  + 1) ";
+MPRINT(EM_DIAGRAM):   ROLE ="INPUT";
+MPRINT(EM_DIAGRAM):   REPORT ="N";
+MPRINT(EM_DIAGRAM):   LEVEL ="INTERVAL";
+MPRINT(EM_DIAGRAM):   end;
+MPRINT(EM_DIAGRAM):   if NAME="REP_yoj" then delete;
+MPRINT(EM_DIAGRAM):   if NAME="LOG_yoj" then do;
+MPRINT(EM_DIAGRAM):   COMMENT = "log(yoj  + 1) ";
+MPRINT(EM_DIAGRAM):   ROLE ="REJECTED";
+MPRINT(EM_DIAGRAM):   REPORT ="N";
+MPRINT(EM_DIAGRAM):   LEVEL ="INTERVAL";
+MPRINT(EM_DIAGRAM):   end;
+MPRINT(EM_DIAGRAM):   if NAME="yoj" then delete;
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):   filename _delta;
+NOTE: View EMWS1.TRANS_TRAIN.VIEW used (Total process time):
+      real time           0.09 seconds
+      cpu time            0.09 seconds
+      
+NOTE: View EMWS1.TRANS_VALIDATE.VIEW used (Total process time):
+      real time           0.07 seconds
+      cpu time            0.07 seconds
+      
+MPRINT(EM_DIAGRAM):    proc printto;
+MPRINT(EM_DIAGRAM):   run;

@@ -1,0 +1,1026 @@
+MPRINT(EM_DIAGRAM):    data _null_;
+MPRINT(EM_DIAGRAM):   call symput('NLDATE', strip(put(date(), NLDATE.)));
+MPRINT(EM_DIAGRAM):   call symput('NLTIME', strip(put(datetime(), NLTIME.)));
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):   data _null_;
+MPRINT(EM_DIAGRAM):   nldate= sasmsg("sashelp.dmine", "log_date_note", 'N', "November 05, 
+2015" );
+MPRINT(EM_DIAGRAM):   nltime= sasmsg("sashelp.dmine", "log_time_note", 'N', "14:10:27" );
+MPRINT(EM_DIAGRAM):   put "*------------------------------------------------------------*";
+MPRINT(EM_DIAGRAM):   put "* Training Log";
+MPRINT(EM_DIAGRAM):   put nldate;
+MPRINT(EM_DIAGRAM):   put nltime;
+MPRINT(EM_DIAGRAM):   put "*------------------------------------------------------------*";
+MPRINT(EM_DIAGRAM):   run;
+*------------------------------------------------------------*
+* Training Log
+Date:                November 05, 2015
+Time:                14:10:27
+*------------------------------------------------------------*
+MPRINT(EM_DIAGRAM):    filename O2_4CN4J 
+"C:\Users\bteric01\Documents\Tutorials_Projects\Project_3\Workspaces\EMWS1\Trans\EMTRAIN.out" 
+encoding="UTF-8" NOBOM;
+MPRINT(EM_DIAGRAM):   proc printto print=O2_4CN4J new;
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):    filename _LOG 
+"C:\Users\bteric01\Documents\Tutorials_Projects\Project_3\Workspaces\EMWS1\Trans\EMLOG.log" 
+encoding="UTF-8" NOBOM;
+MPRINT(EM_DIAGRAM):    data _null_;
+MPRINT(EM_DIAGRAM):   call symput('NLDATE', strip(put(date(), NLDATE.)));
+MPRINT(EM_DIAGRAM):   call symput('NLTIME', strip(put(datetime(), NLTIME.)));
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):   data _null_;
+MPRINT(EM_DIAGRAM):   nldate= sasmsg("sashelp.dmine", "log_date_note", 'N', "November 05, 
+2015" );
+MPRINT(EM_DIAGRAM):   nltime= sasmsg("sashelp.dmine", "log_time_note", 'N', "14:10:27" );
+MPRINT(EM_DIAGRAM):   file _LOG;
+MPRINT(EM_DIAGRAM):   put "*------------------------------------------------------------*";
+MPRINT(EM_DIAGRAM):   put "User:                bteric01";
+MPRINT(EM_DIAGRAM):   put nldate;
+MPRINT(EM_DIAGRAM):   put nltime;
+MPRINT(EM_DIAGRAM):   put "Site:                70080760";
+MPRINT(EM_DIAGRAM):   put "Platform:            X64_7PRO";
+MPRINT(EM_DIAGRAM):   put "Maintenance Release: 9.04.01M1P120413";
+MPRINT(EM_DIAGRAM):   put "EM Version:          13.1";
+MPRINT(EM_DIAGRAM):   put "* ";
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):    filename _LOGIN 
+"C:\Users\bteric01\Documents\Tutorials_Projects\Project_3\Workspaces\EMWS1\Trans\EMTRAIN.log" 
+encoding="UTF-8" NOBOM;
+MPRINT(EM_COPYFILE):   data _null_;
+MPRINT(EM_COPYFILE):   length line $20000;
+MPRINT(EM_COPYFILE):   file _LOG MOD lrecl=20000;
+MPRINT(EM_COPYFILE):   fid=fopen("_LOGIN",'i',20000,'v');
+MPRINT(EM_COPYFILE):   if fid > 0 then do;
+MPRINT(EM_COPYFILE):   do while(^fread(fid));
+MPRINT(EM_COPYFILE):   rlen = frlen(fid);
+MPRINT(EM_COPYFILE):   rc= fget(fid,line,20000);
+MPRINT(EM_COPYFILE):   start = length(line)-length(left(line))+1;
+MPRINT(EM_COPYFILE):   line=strip(line);
+MPRINT(EM_COPYFILE):   put @start line;
+MPRINT(EM_COPYFILE):   end;
+MPRINT(EM_COPYFILE):   if fid > 0 then rc=fclose(fid);
+MPRINT(EM_COPYFILE):   end;
+MPRINT(EM_COPYFILE):   run;
+MPRINT(EM_DIAGRAM):  ;
+MPRINT(EM_DIAGRAM):   filename _LOGIN;
+MPRINT(EM_DIAGRAM):    data _null_;
+MPRINT(EM_DIAGRAM):   file _LOG mod;
+MPRINT(EM_DIAGRAM):   put _page_;
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):   filename _LOGIN 
+"C:\Users\bteric01\Documents\Tutorials_Projects\Project_3\Workspaces\EMWS1\Trans\EMSCORE.log" 
+encoding="UTF-8" NOBOM;
+MPRINT(EM_DIAGRAM):  ;
+MPRINT(EM_DIAGRAM):   data _null_;
+MPRINT(EM_DIAGRAM):   file _LOG mod;
+MPRINT(EM_DIAGRAM):   put _page_;
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):    filename _LOGIN 
+"C:\Users\bteric01\Documents\Tutorials_Projects\Project_3\Workspaces\EMWS1\Trans\EMREPORT.log" 
+encoding="UTF-8" NOBOM;
+MPRINT(EM_DIAGRAM):  ;
+MPRINT(EM_DIAGRAM):   filename _LOGIN;
+MPRINT(EM_DIAGRAM):    filename _LOG;
+MPRINT(EM_DIAGRAM):    filename _OUT 
+"C:\Users\bteric01\Documents\Tutorials_Projects\Project_3\Workspaces\EMWS1\Trans\EMOUTPUT.out" 
+encoding="UTF-8" NOBOM;
+MPRINT(EM_DIAGRAM):    data _null_;
+MPRINT(EM_DIAGRAM):   call symput('NLDATE', strip(put(date(), NLDATE.)));
+MPRINT(EM_DIAGRAM):   call symput('NLTIME', strip(put(datetime(), NLTIME.)));
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):   data _null_;
+MPRINT(EM_DIAGRAM):   nldate= sasmsg("sashelp.dmine", "log_date_note", 'N', "November 05, 
+2015" );
+MPRINT(EM_DIAGRAM):   nltime= sasmsg("sashelp.dmine", "log_time_note", 'N', "14:10:27" );
+MPRINT(EM_DIAGRAM):   file _OUT;
+MPRINT(EM_DIAGRAM):   put "*------------------------------------------------------------*";
+MPRINT(EM_DIAGRAM):   put "User:                bteric01";
+MPRINT(EM_DIAGRAM):   put nldate;
+MPRINT(EM_DIAGRAM):   put nltime;
+MPRINT(EM_DIAGRAM):   put "*------------------------------------------------------------*";
+MPRINT(EM_DIAGRAM):   put "* Training Output";
+MPRINT(EM_DIAGRAM):   put "*------------------------------------------------------------*";
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):    filename _OUTIN 
+"C:\Users\bteric01\Documents\Tutorials_Projects\Project_3\Workspaces\EMWS1\Trans\EMTRAIN.out" 
+encoding="UTF-8" NOBOM;
+MPRINT(EM_DIAGRAM):   ;
+MPRINT(EM_COPYFILE):   data _null_;
+MPRINT(EM_COPYFILE):   length line $20000;
+MPRINT(EM_COPYFILE):   file _OUT MOD lrecl=20000;
+MPRINT(EM_COPYFILE):   fid=fopen("_OUTIN",'i',20000,'v');
+MPRINT(EM_COPYFILE):   if fid > 0 then do;
+MPRINT(EM_COPYFILE):   do while(^fread(fid));
+MPRINT(EM_COPYFILE):   rlen = frlen(fid);
+MPRINT(EM_COPYFILE):   rc= fget(fid,line,20000);
+MPRINT(EM_COPYFILE):   start = length(line)-length(left(line))+1;
+MPRINT(EM_COPYFILE):   line=strip(line);
+MPRINT(EM_COPYFILE):   put @start line;
+MPRINT(EM_COPYFILE):   end;
+MPRINT(EM_COPYFILE):   if fid > 0 then rc=fclose(fid);
+MPRINT(EM_COPYFILE):   end;
+MPRINT(EM_COPYFILE):   run;
+MPRINT(EM_DIAGRAM):  ;
+MPRINT(EM_DIAGRAM):   filename _OUTIN;
+MPRINT(EM_DIAGRAM):    data _null_;
+MPRINT(EM_DIAGRAM):   file _OUT mod;
+MPRINT(EM_DIAGRAM):   put _page_;
+MPRINT(EM_DIAGRAM):   put // "*------------------------------------------------------------*";
+MPRINT(EM_DIAGRAM):   put "* Score Output";
+MPRINT(EM_DIAGRAM):   put "*------------------------------------------------------------*";
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):    filename _OUTIN 
+"C:\Users\bteric01\Documents\Tutorials_Projects\Project_3\Workspaces\EMWS1\Trans\EMSCORE.out" 
+encoding="UTF-8" NOBOM;
+MPRINT(EM_DIAGRAM):  ;
+MPRINT(EM_DIAGRAM):   filename _OUTIN;
+MPRINT(EM_DIAGRAM):    data _null_;
+MPRINT(EM_DIAGRAM):   file _OUT mod;
+MPRINT(EM_DIAGRAM):   put _page_;
+MPRINT(EM_DIAGRAM):   put // "*------------------------------------------------------------*";
+MPRINT(EM_DIAGRAM):   put "* Report Output";
+MPRINT(EM_DIAGRAM):   put "*------------------------------------------------------------*";
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):    filename _OUTIN 
+"C:\Users\bteric01\Documents\Tutorials_Projects\Project_3\Workspaces\EMWS1\Trans\EMREPORT.out" 
+encoding="UTF-8" NOBOM;
+MPRINT(EM_DIAGRAM):  ;
+MPRINT(EM_DIAGRAM):   filename _OUTIN;
+MPRINT(EM_DIAGRAM):    filename _OUT;
+MPRINT(EM_DIAGRAM):    filename _emtool_ 
+'C:\Users\bteric01\Documents\Tutorials_Projects\Project_3\Workspaces\EMWS1\Trans\EMRUNSTATUS.xm
+l' encoding="UTF-8" NOBOM;
+96165      proc freq data=EMWS1.Trans_VariableSet noprint;
+MPRINT(EM_DIAGRAM):    proc freq data=EMWS1.Trans_VariableSet noprint;
+96166      table ROLE*LEVEL/out=WORK.TransMETA;
+MPRINT(EM_DIAGRAM):   table ROLE*LEVEL/out=WORK.TransMETA;
+96167      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: There were 23 observations read from the data set EMWS1.TRANS_VARIABLESET.
+NOTE: The data set WORK.TRANSMETA has 4 observations and 4 variables.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.03 seconds
+      
+
+96168      proc print data=WORK.TransMETA label noobs;
+MPRINT(EM_DIAGRAM):   proc print data=WORK.TransMETA label noobs;
+96169      var ROLE LEVEL COUNT;
+MPRINT(EM_DIAGRAM):   var ROLE LEVEL COUNT;
+96170      label ROLE = "%sysfunc(sasmsg(sashelp.dmine, meta_role_vlabel, NOQUOTE))" LEVEL =
+96170    ! "%sysfunc(sasmsg(sashelp.dmine, meta_level_vlabel, NOQUOTE))" COUNT =
+96170    ! "%sysfunc(sasmsg(sashelp.dmine, rpt_count_vlabel, NOQUOTE))";
+MPRINT(EM_DIAGRAM):   label ROLE = "Role" LEVEL = "Measurement Level" COUNT = "Frequency 
+Count";
+96171      title9 ' ';
+MPRINT(EM_DIAGRAM):   title9 ' ';
+96172      title10 "%sysfunc(sasmsg(sashelp.dmine, rpt_varSummary_title  , NOQUOTE))";
+MPRINT(EM_DIAGRAM):   title10 "Variable Summary";
+MPRINT(EM_DIAGRAM):   run;
+96173      run;
+
+NOTE: There were 4 observations read from the data set WORK.TRANSMETA.
+NOTE: The PROCEDURE PRINT printed page 47.
+NOTE: PROCEDURE PRINT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+96174      title10;
+MPRINT(EM_DIAGRAM):   title10;
+96175      data WORK.M0_A6UO6;
+MPRINT(EM_DIAGRAM):    data WORK.M0_A6UO6;
+96176      set WORK.M0_A6UO6;
+MPRINT(EM_DIAGRAM):   set WORK.M0_A6UO6;
+96177      if (METHOD='NONE' and ROLE ne 'FREQ') or (role = 'REJECTED' and METHOD = 'DEFAULT')
+96177    ! then delete;
+MPRINT(EM_DIAGRAM):   if (METHOD='NONE' and ROLE ne 'FREQ') or (role = 'REJECTED' and METHOD = 
+'DEFAULT') then delete;
+96178      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: There were 23 observations read from the data set WORK.M0_A6UO6.
+NOTE: The data set WORK.M0_A6UO6 has 14 observations and 22 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+MPRINT(EM_DIAGRAM):   reset noprint;
+MPRINT(EM_DIAGRAM):   select count(*) into :_tmpnobs from EMWS1.Repl_TRAIN;
+NOTE: View EMWS1.REPL_TRAIN.VIEW used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.03 seconds
+      
+NOTE: There were 2979 observations read from the data set EMWS1.PART_TRAIN.
+MPRINT(EM_DIAGRAM):   quit;
+96243      *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):     *------------------------------------------------------------*;
+96244      * Trans: Computing Summary Statistics;
+MPRINT(EM_DIAGRAM):   * Trans: Computing Summary Statistics;
+96245      *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+96246      data WORK.M0WUD_JR;
+MPRINT(EM_DIAGRAM):   data WORK.M0WUD_JR;
+96247      set WORK.M0WUD_JR;
+MPRINT(EM_DIAGRAM):   set WORK.M0WUD_JR;
+96248      if (role = 'REJECTED') then role = 'INPUT';
+MPRINT(EM_DIAGRAM):   if (role = 'REJECTED') then role = 'INPUT';
+96249      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: There were 14 observations read from the data set WORK.M0WUD_JR.
+NOTE: The data set WORK.M0WUD_JR has 14 observations and 22 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+96250      *------------------------------------------------------------* ;
+MPRINT(EM_DIAGRAM):    *------------------------------------------------------------* ;
+96251      * EM: DMDBClass Macro ;
+MPRINT(EM_DIAGRAM):   * EM: DMDBClass Macro ;
+96252      *------------------------------------------------------------* ;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------* ;
+96253      %macro DMDBClass;
+96254          bad(DESC) job(ASC) reason(ASC)
+96255      %mend DMDBClass;
+96256      *------------------------------------------------------------* ;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------* ;
+96257      * EM: DMDBVar Macro ;
+MPRINT(EM_DIAGRAM):   * EM: DMDBVar Macro ;
+96258      *------------------------------------------------------------* ;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------* ;
+96259      %macro DMDBVar;
+96260          REP_clage REP_clno REP_debtinc REP_delinq REP_derog REP_loan REP_mortdue
+96261         REP_ninq REP_value REP_yoj yoj
+96262      %mend DMDBVar;
+96263      *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+96264      * EM: Create DMDB;
+MPRINT(EM_DIAGRAM):   * EM: Create DMDB;
+96265      *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+96266      proc dmdb batch data=EMWS1.Repl_TRAIN
+96267      dmdbcat=WORK.EM_DMDB
+96268      classout=WORK.Transclassout
+96269      maxlevel = 513
+96270      ;
+MPRINT(EM_DIAGRAM):   proc dmdb batch data=EMWS1.Repl_TRAIN dmdbcat=WORK.EM_DMDB 
+classout=WORK.Transclassout maxlevel = 513 ;
+MPRINT(EM_DIAGRAM):   class
+96271      class %DMDBClass;
+MPRINT(DMDBCLASS):   bad(DESC) job(ASC) reason(ASC)
+MPRINT(EM_DIAGRAM):  ;
+MPRINT(EM_DIAGRAM):   var
+96272      var %DMDBVar;
+MPRINT(DMDBVAR):   REP_clage REP_clno REP_debtinc REP_delinq REP_derog REP_loan REP_mortdue 
+REP_ninq REP_value REP_yoj yoj
+MPRINT(EM_DIAGRAM):  ;
+96273      target
+96274      bad
+96275      ;
+MPRINT(EM_DIAGRAM):   target bad ;
+96276      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: Records processed = 2979   Memory used = 511K.
+NOTE: View EMWS1.REPL_TRAIN.VIEW used (Total process time):
+      real time           0.06 seconds
+      cpu time            0.04 seconds
+      
+NOTE: There were 2979 observations read from the data set EMWS1.PART_TRAIN.
+NOTE: There were 2979 observations read from the data set EMWS1.REPL_TRAIN.
+NOTE: The data set WORK.TRANSCLASSOUT has 12 observations and 9 variables.
+NOTE: PROCEDURE DMDB used (Total process time):
+      real time           0.07 seconds
+      cpu time            0.06 seconds
+      
+
+MPRINT(EM_DIAGRAM):   quit;
+MPRINT(EM_DIAGRAM):   *--- end code ---*;
+96277      quit;
+96278      *--- end code ---*;
+
+96279      data WORK.TransINTERVALMETA;
+MPRINT(EM_DIAGRAM):    data WORK.TransINTERVALMETA;
+96280      set WORK.M0_A6UO6;
+MPRINT(EM_DIAGRAM):   set WORK.M0_A6UO6;
+96281      if LEVEL ne 'INTERVAL' then delete;
+MPRINT(EM_DIAGRAM):   if LEVEL ne 'INTERVAL' then delete;
+96282      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: There were 14 observations read from the data set WORK.M0_A6UO6.
+NOTE: The data set WORK.TRANSINTERVALMETA has 11 observations and 22 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+96283      *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):    *------------------------------------------------------------*;
+96284      * Trans: Determining Variables to Scale;
+MPRINT(EM_DIAGRAM):   * Trans: Determining Variables to Scale;
+96285      *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+96286      data WORK.M10WMX8U;
+MPRINT(EM_DIAGRAM):   data WORK.M10WMX8U;
+96287      set WORK.M10WMX8U;
+MPRINT(EM_DIAGRAM):   set WORK.M10WMX8U;
+96288      where (TYPE="N" and (METHOD in("MAX_NORM", "MAX_CORR", "EQUALIZE", "OP_MAX_NORM",
+96288    ! "OP_EQUALIZE"))) or (ROLE eq "FREQ");
+MPRINT(EM_DIAGRAM):   where (TYPE="N" and (METHOD in("MAX_NORM", "MAX_CORR", "EQUALIZE", 
+"OP_MAX_NORM", "OP_EQUALIZE"))) or (ROLE eq "FREQ");
+96289      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: There were 0 observations read from the data set WORK.M10WMX8U.
+      WHERE ((TYPE='N') and METHOD in ('EQUALIZE', 'MAX_CORR', 'MAX_NORM', 'OP_EQUALIZE', 
+      'OP_MAX_NORM')) or (ROLE='FREQ');
+NOTE: The data set WORK.M10WMX8U has 0 observations and 22 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+NOTE: View EMWS1.REPL_TRAIN.VIEW used (Total process time):
+      real time           0.57 seconds
+      cpu time            0.48 seconds
+      
+*------------------------------------------------------------* 
+*  Trans: Creating EMWS1.Trans_RESULT 
+*------------------------------------------------------------* 
+MPRINT(EM_DIAGRAM):      data EMWS1.Trans_RESULT;
+MPRINT(EM_DIAGRAM):   length NAME NEWVAR $32 LEVEL $10 POWER 8 FORMULA $70 LABEL $44 TERM $200;
+MPRINT(EM_DIAGRAM):   NAME = "REP_clage";
+MPRINT(EM_DIAGRAM):   NEWVAR = "LOG_REP_clage";
+MPRINT(EM_DIAGRAM):   POWER = 0;
+MPRINT(EM_DIAGRAM):   FORMULA = "log(REP_clage  + 1)";
+MPRINT(EM_DIAGRAM):   LABEL = 'Transformed: Replacement: Age of oldest trade line in months';
+MPRINT(EM_DIAGRAM):   LEVEL = "INTERVAL";
+MPRINT(EM_DIAGRAM):   TYPE = "N";
+MPRINT(EM_DIAGRAM):   output;
+MPRINT(EM_DIAGRAM):   NAME = "REP_clno";
+MPRINT(EM_DIAGRAM):   NEWVAR = "LOG_REP_clno";
+MPRINT(EM_DIAGRAM):   POWER = 0;
+MPRINT(EM_DIAGRAM):   FORMULA = "log(REP_clno  + 1)";
+MPRINT(EM_DIAGRAM):   LABEL = 'Transformed: Replacement: Number of trade (credit) lines';
+MPRINT(EM_DIAGRAM):   LEVEL = "INTERVAL";
+MPRINT(EM_DIAGRAM):   TYPE = "N";
+MPRINT(EM_DIAGRAM):   output;
+MPRINT(EM_DIAGRAM):   NAME = "REP_debtinc";
+MPRINT(EM_DIAGRAM):   NEWVAR = "LOG_REP_debtinc";
+MPRINT(EM_DIAGRAM):   POWER = 0;
+MPRINT(EM_DIAGRAM):   FORMULA = "log(REP_debtinc  + 1)";
+MPRINT(EM_DIAGRAM):   LABEL = 'Transformed: Replacement: Debt to income ratio';
+MPRINT(EM_DIAGRAM):   LEVEL = "INTERVAL";
+MPRINT(EM_DIAGRAM):   TYPE = "N";
+MPRINT(EM_DIAGRAM):   output;
+MPRINT(EM_DIAGRAM):   NAME = "REP_delinq";
+MPRINT(EM_DIAGRAM):   NEWVAR = "LOG_REP_delinq";
+MPRINT(EM_DIAGRAM):   POWER = 0;
+MPRINT(EM_DIAGRAM):   FORMULA = "log(REP_delinq  + 1)";
+MPRINT(EM_DIAGRAM):   LABEL = 'Transformed: Replacement: Number of delinquent trade lines';
+MPRINT(EM_DIAGRAM):   LEVEL = "INTERVAL";
+MPRINT(EM_DIAGRAM):   TYPE = "N";
+MPRINT(EM_DIAGRAM):   output;
+MPRINT(EM_DIAGRAM):   NAME = "REP_derog";
+MPRINT(EM_DIAGRAM):   NEWVAR = "LOG_REP_derog";
+MPRINT(EM_DIAGRAM):   POWER = 0;
+MPRINT(EM_DIAGRAM):   FORMULA = "log(REP_derog  + 1)";
+MPRINT(EM_DIAGRAM):   LABEL = 'Transformed: Replacement: Number of major derogatory reports';
+MPRINT(EM_DIAGRAM):   LEVEL = "INTERVAL";
+MPRINT(EM_DIAGRAM):   TYPE = "N";
+MPRINT(EM_DIAGRAM):   output;
+MPRINT(EM_DIAGRAM):   NAME = "REP_loan";
+MPRINT(EM_DIAGRAM):   NEWVAR = "LOG_REP_loan";
+MPRINT(EM_DIAGRAM):   POWER = 0;
+MPRINT(EM_DIAGRAM):   FORMULA = "log(REP_loan  + 1)";
+MPRINT(EM_DIAGRAM):   LABEL = 'Transformed: Replacement: Amount of current loan request';
+MPRINT(EM_DIAGRAM):   LEVEL = "INTERVAL";
+MPRINT(EM_DIAGRAM):   TYPE = "N";
+MPRINT(EM_DIAGRAM):   output;
+MPRINT(EM_DIAGRAM):   NAME = "REP_mortdue";
+MPRINT(EM_DIAGRAM):   NEWVAR = "LOG_REP_mortdue";
+MPRINT(EM_DIAGRAM):   POWER = 0;
+MPRINT(EM_DIAGRAM):   FORMULA = "log(REP_mortdue  + 1)";
+MPRINT(EM_DIAGRAM):   LABEL = 'Transformed: Replacement: Amount due on existing mortgage';
+MPRINT(EM_DIAGRAM):   LEVEL = "INTERVAL";
+MPRINT(EM_DIAGRAM):   TYPE = "N";
+MPRINT(EM_DIAGRAM):   output;
+MPRINT(EM_DIAGRAM):   NAME = "REP_ninq";
+MPRINT(EM_DIAGRAM):   NEWVAR = "LOG_REP_ninq";
+MPRINT(EM_DIAGRAM):   POWER = 0;
+MPRINT(EM_DIAGRAM):   FORMULA = "log(REP_ninq  + 1)";
+MPRINT(EM_DIAGRAM):   LABEL = 'Transformed: Replacement: Number of recent credit inquiries';
+MPRINT(EM_DIAGRAM):   LEVEL = "INTERVAL";
+MPRINT(EM_DIAGRAM):   TYPE = "N";
+MPRINT(EM_DIAGRAM):   output;
+MPRINT(EM_DIAGRAM):   NAME = "REP_value";
+MPRINT(EM_DIAGRAM):   NEWVAR = "LOG_REP_value";
+MPRINT(EM_DIAGRAM):   POWER = 0;
+MPRINT(EM_DIAGRAM):   FORMULA = "log(REP_value  + 1)";
+MPRINT(EM_DIAGRAM):   LABEL = 'Transformed: Replacement: Value of current property';
+MPRINT(EM_DIAGRAM):   LEVEL = "INTERVAL";
+MPRINT(EM_DIAGRAM):   TYPE = "N";
+MPRINT(EM_DIAGRAM):   output;
+MPRINT(EM_DIAGRAM):   NAME = "REP_yoj";
+MPRINT(EM_DIAGRAM):   NEWVAR = "LOG_REP_yoj";
+MPRINT(EM_DIAGRAM):   POWER = 0;
+MPRINT(EM_DIAGRAM):   FORMULA = "log(REP_yoj  + 1)";
+MPRINT(EM_DIAGRAM):   LABEL = 'Transformed: Replacement: Years on current job';
+MPRINT(EM_DIAGRAM):   LEVEL = "INTERVAL";
+MPRINT(EM_DIAGRAM):   TYPE = "N";
+MPRINT(EM_DIAGRAM):   output;
+MPRINT(EM_DIAGRAM):   NAME = "yoj";
+MPRINT(EM_DIAGRAM):   NEWVAR = "LOG_yoj";
+MPRINT(EM_DIAGRAM):   POWER = 0;
+MPRINT(EM_DIAGRAM):   FORMULA = "log(yoj  + 1)";
+MPRINT(EM_DIAGRAM):   LABEL = 'Transformed: Years on current job';
+MPRINT(EM_DIAGRAM):   LEVEL = "INTERVAL";
+MPRINT(EM_DIAGRAM):   TYPE = "N";
+MPRINT(EM_DIAGRAM):   output;
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):   proc sort data=EMWS1.Trans_RESULT NOTHREADS;
+MPRINT(EM_DIAGRAM):   by NAME;
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):   proc sort data=WORK.M0_A6UO6 
+out=WORK._TRANSRESLT(RENAME=(LEVEL=INPUTLEVEL TYPE=INPUTTYPE) KEEP=NAME ROLE LEVEL TYPE) 
+NOTHREADS;
+MPRINT(EM_DIAGRAM):   by NAME;
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):   data EMWS1.Trans_RESULT(RENAME=(NAME=INPUTNAME NEWVAR=NAME));
+MPRINT(EM_DIAGRAM):   merge EMWS1.Trans_RESULT(in=a) WORK._TRANSRESLT;
+MPRINT(EM_DIAGRAM):   by NAME;
+MPRINT(EM_DIAGRAM):   if a then output;
+MPRINT(EM_DIAGRAM):   run;
+WARNING: Multiple lengths were specified for the BY variable NAME by input data sets. This 
+         might cause unexpected results.
+MPRINT(EM_DIAGRAM):   proc datasets library=EMWS1 nolist;
+MPRINT(EM_DIAGRAM):   modify Trans_RESULT;
+MPRINT(EM_DIAGRAM):   label INPUTNAME = "Input Name" NAME = "Output Name" POWER = "Power" 
+FORMULA = "Formula" ROLE = "rpt_role_vlabel" INPUTLEVEL = "Input Level" LEVEL = "Output Level" 
+INPUTTYPE = "Input Type" TYPE = "Output Type";
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: PROCEDURE DATASETS used (Total process time):
+      real time           0.10 seconds
+      cpu time            0.10 seconds
+      
+
+96400      data EMWS1.Trans_RESULT;
+MPRINT(EM_DIAGRAM):   data EMWS1.Trans_RESULT;
+96401      length NAME $32 FORMULA $70 POWER 8 ROLE $32 LEVEL $10 INPUTNAME $32 INPUTTYPE $1
+96401    ! LABEL $44;
+MPRINT(EM_DIAGRAM):   length NAME $32 FORMULA $70 POWER 8 ROLE $32 LEVEL $10 INPUTNAME $32 
+INPUTTYPE $1 LABEL $44;
+96402      label INPUTNAME ='Input Name' NAME='Name' POWER='Power' FORMULA='Formula'
+96402    ! ROLE='Role' INPUTLEVEL='Input Level' LEVEL='Level' INPUTTYPE='Input Type'
+96402    ! TYPE='Type';
+MPRINT(EM_DIAGRAM):   label INPUTNAME = 'Input Name' NAME= 'Name' POWER= 'Power' FORMULA= 
+'Formula' ROLE= 'Role' INPUTLEVEL= 'Input Level' LEVEL= 'Level' INPUTTYPE= 'Input Type' TYPE= 
+'Type';
+96403      set EMWS1.Trans_RESULT;
+MPRINT(EM_DIAGRAM):   set EMWS1.Trans_RESULT;
+96404      if INPUTNAME = '' then INPUTNAME = "Mixture of variables";
+MPRINT(EM_DIAGRAM):   if INPUTNAME = '' then INPUTNAME = "Mixture of variables";
+96405      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: There were 11 observations read from the data set EMWS1.TRANS_RESULT.
+NOTE: The data set EMWS1.TRANS_RESULT has 11 observations and 11 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+96406      data WORK.M0O23KGT;
+MPRINT(EM_DIAGRAM):    data WORK.M0O23KGT;
+96407      set WORK.M0O23KGT;
+MPRINT(EM_DIAGRAM):   set WORK.M0O23KGT;
+96408      if ROLE='REJECTED' then ROLE='INPUT';
+MPRINT(EM_DIAGRAM):   if ROLE='REJECTED' then ROLE='INPUT';
+96409      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: There were 11 observations read from the data set WORK.M0O23KGT.
+NOTE: The data set WORK.M0O23KGT has 11 observations and 11 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+*------------------------------------------------------------* 
+*  Trans: Computing summary statistics for transformed variables 
+*------------------------------------------------------------* 
+MPRINT(EM_DIAGRAM):    data WORK.Trans_TRANSFORM / view=WORK.Trans_TRANSFORM;
+MPRINT(EM_DIAGRAM):   set EMWS1.Repl_TRAIN;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   * TRANSFORM: REP_clage , log(REP_clage + 1);
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   label LOG_REP_clage = 'Transformed: Replacement: Age of oldest trade 
+line in months';
+MPRINT(EM_DIAGRAM):   if REP_clage eq . then LOG_REP_clage = .;
+MPRINT(EM_DIAGRAM):   else do;
+MPRINT(EM_DIAGRAM):   if REP_clage + 1 > 0 then LOG_REP_clage = log(REP_clage + 1);
+MPRINT(EM_DIAGRAM):   else LOG_REP_clage = .;
+MPRINT(EM_DIAGRAM):   end;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   * TRANSFORM: REP_clno , log(REP_clno + 1);
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   label LOG_REP_clno = 'Transformed: Replacement: Number of trade (credit) 
+lines';
+MPRINT(EM_DIAGRAM):   if REP_clno eq . then LOG_REP_clno = .;
+MPRINT(EM_DIAGRAM):   else do;
+MPRINT(EM_DIAGRAM):   if REP_clno + 1 > 0 then LOG_REP_clno = log(REP_clno + 1);
+MPRINT(EM_DIAGRAM):   else LOG_REP_clno = .;
+MPRINT(EM_DIAGRAM):   end;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   * TRANSFORM: REP_debtinc , log(REP_debtinc + 1);
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   label LOG_REP_debtinc = 'Transformed: Replacement: Debt to income ratio';
+MPRINT(EM_DIAGRAM):   if REP_debtinc eq . then LOG_REP_debtinc = .;
+MPRINT(EM_DIAGRAM):   else do;
+MPRINT(EM_DIAGRAM):   if REP_debtinc + 1 > 0 then LOG_REP_debtinc = log(REP_debtinc + 1);
+MPRINT(EM_DIAGRAM):   else LOG_REP_debtinc = .;
+MPRINT(EM_DIAGRAM):   end;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   * TRANSFORM: REP_delinq , log(REP_delinq + 1);
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   label LOG_REP_delinq = 'Transformed: Replacement: Number of delinquent 
+trade lines';
+MPRINT(EM_DIAGRAM):   if REP_delinq eq . then LOG_REP_delinq = .;
+MPRINT(EM_DIAGRAM):   else do;
+MPRINT(EM_DIAGRAM):   if REP_delinq + 1 > 0 then LOG_REP_delinq = log(REP_delinq + 1);
+MPRINT(EM_DIAGRAM):   else LOG_REP_delinq = .;
+MPRINT(EM_DIAGRAM):   end;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   * TRANSFORM: REP_derog , log(REP_derog + 1);
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   label LOG_REP_derog = 'Transformed: Replacement: Number of major 
+derogatory reports';
+MPRINT(EM_DIAGRAM):   if REP_derog eq . then LOG_REP_derog = .;
+MPRINT(EM_DIAGRAM):   else do;
+MPRINT(EM_DIAGRAM):   if REP_derog + 1 > 0 then LOG_REP_derog = log(REP_derog + 1);
+MPRINT(EM_DIAGRAM):   else LOG_REP_derog = .;
+MPRINT(EM_DIAGRAM):   end;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   * TRANSFORM: REP_loan , log(REP_loan + 1);
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   label LOG_REP_loan = 'Transformed: Replacement: Amount of current loan 
+request';
+MPRINT(EM_DIAGRAM):   if REP_loan eq . then LOG_REP_loan = .;
+MPRINT(EM_DIAGRAM):   else do;
+MPRINT(EM_DIAGRAM):   if REP_loan + 1 > 0 then LOG_REP_loan = log(REP_loan + 1);
+MPRINT(EM_DIAGRAM):   else LOG_REP_loan = .;
+MPRINT(EM_DIAGRAM):   end;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   * TRANSFORM: REP_mortdue , log(REP_mortdue + 1);
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   label LOG_REP_mortdue = 'Transformed: Replacement: Amount due on 
+existing mortgage';
+MPRINT(EM_DIAGRAM):   if REP_mortdue eq . then LOG_REP_mortdue = .;
+MPRINT(EM_DIAGRAM):   else do;
+MPRINT(EM_DIAGRAM):   if REP_mortdue + 1 > 0 then LOG_REP_mortdue = log(REP_mortdue + 1);
+MPRINT(EM_DIAGRAM):   else LOG_REP_mortdue = .;
+MPRINT(EM_DIAGRAM):   end;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   * TRANSFORM: REP_ninq , log(REP_ninq + 1);
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   label LOG_REP_ninq = 'Transformed: Replacement: Number of recent credit 
+inquiries';
+MPRINT(EM_DIAGRAM):   if REP_ninq eq . then LOG_REP_ninq = .;
+MPRINT(EM_DIAGRAM):   else do;
+MPRINT(EM_DIAGRAM):   if REP_ninq + 1 > 0 then LOG_REP_ninq = log(REP_ninq + 1);
+MPRINT(EM_DIAGRAM):   else LOG_REP_ninq = .;
+MPRINT(EM_DIAGRAM):   end;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   * TRANSFORM: REP_value , log(REP_value + 1);
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   label LOG_REP_value = 'Transformed: Replacement: Value of current 
+property';
+MPRINT(EM_DIAGRAM):   if REP_value eq . then LOG_REP_value = .;
+MPRINT(EM_DIAGRAM):   else do;
+MPRINT(EM_DIAGRAM):   if REP_value + 1 > 0 then LOG_REP_value = log(REP_value + 1);
+MPRINT(EM_DIAGRAM):   else LOG_REP_value = .;
+MPRINT(EM_DIAGRAM):   end;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   * TRANSFORM: REP_yoj , log(REP_yoj + 1);
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   label LOG_REP_yoj = 'Transformed: Replacement: Years on current job';
+MPRINT(EM_DIAGRAM):   if REP_yoj eq . then LOG_REP_yoj = .;
+MPRINT(EM_DIAGRAM):   else do;
+MPRINT(EM_DIAGRAM):   if REP_yoj + 1 > 0 then LOG_REP_yoj = log(REP_yoj + 1);
+MPRINT(EM_DIAGRAM):   else LOG_REP_yoj = .;
+MPRINT(EM_DIAGRAM):   end;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   * TRANSFORM: yoj , log(yoj + 1);
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   label LOG_yoj = 'Transformed: Years on current job';
+MPRINT(EM_DIAGRAM):   if yoj eq . then LOG_yoj = .;
+MPRINT(EM_DIAGRAM):   else do;
+MPRINT(EM_DIAGRAM):   if yoj + 1 > 0 then LOG_yoj = log(yoj + 1);
+MPRINT(EM_DIAGRAM):   else LOG_yoj = .;
+MPRINT(EM_DIAGRAM):   end;
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):    *------------------------------------------------------------* ;
+MPRINT(EM_DIAGRAM):   * EM: DMDBClass Macro ;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------* ;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------* ;
+MPRINT(EM_DIAGRAM):   * EM: DMDBVar Macro ;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------* ;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   * EM: Create DMDB;
+MPRINT(EM_DIAGRAM):   *------------------------------------------------------------*;
+MPRINT(EM_DIAGRAM):   proc dmdb batch data=WORK.Trans_TRANSFORM dmdbcat=WORK.EM_DMDB maxlevel 
+= 513 ;
+MPRINT(EM_DIAGRAM):   var
+MPRINT(DMDBVAR):   LOG_REP_clage LOG_REP_clno LOG_REP_debtinc LOG_REP_delinq LOG_REP_derog 
+LOG_REP_loan LOG_REP_mortdue LOG_REP_ninq LOG_REP_value LOG_REP_yoj LOG_yoj
+MPRINT(EM_DIAGRAM):  ;
+MPRINT(EM_DIAGRAM):   run;
+MPRINT(EM_DIAGRAM):   quit;
+MPRINT(EM_DIAGRAM):   *--- end code ---*;
+MPRINT(EM_DIAGRAM):    data WORK.Trans_TEMP;
+MPRINT(EM_DIAGRAM):   length SOURCE $6 NAME $32;
+MPRINT(EM_DIAGRAM):   label SOURCE = "Source" NAME = "Variable Name" NLEVEL = "Number of 
+Levels" NMISS = "Missing" MIN = "Minimum" MAX = "Maximum" MEAN = "Mean" STD = "Standard 
+Deviation" SKEWNESS = "Skewness" KURTOSIS = "Kurtosis";
+MPRINT(EM_DIAGRAM):   SOURCE = "OUTPUT";
+MPRINT(EM_DIAGRAM):   NAME = "LOG_REP_clage";
+MPRINT(EM_DIAGRAM):   NMISS = 159;
+MPRINT(EM_DIAGRAM):   NLEVEL = .;
+MPRINT(EM_DIAGRAM):   MIN = 0;
+MPRINT(EM_DIAGRAM):   MAX = 6.09602201480659;
+MPRINT(EM_DIAGRAM):   MEAN = 5.08031649207054;
+MPRINT(EM_DIAGRAM):   STD = 0.53992882032277;
+MPRINT(EM_DIAGRAM):   SKEWNESS = -1.77596204068915;
+MPRINT(EM_DIAGRAM):   KURTOSIS = 9.66144529799502;
+MPRINT(EM_DIAGRAM):   output;
+MPRINT(EM_DIAGRAM):   SOURCE = "OUTPUT";
+MPRINT(EM_DIAGRAM):   NAME = "LOG_REP_clno";
+MPRINT(EM_DIAGRAM):   NMISS = 117;
+MPRINT(EM_DIAGRAM):   NLEVEL = .;
+MPRINT(EM_DIAGRAM):   MIN = 0;
+MPRINT(EM_DIAGRAM):   MAX = 3.97267646089947;
+MPRINT(EM_DIAGRAM):   MEAN = 2.97327871885609;
+MPRINT(EM_DIAGRAM):   STD = 0.57597379170017;
+MPRINT(EM_DIAGRAM):   SKEWNESS = -1.83913117000406;
+MPRINT(EM_DIAGRAM):   KURTOSIS = 6.87153344537087;
+MPRINT(EM_DIAGRAM):   output;
+MPRINT(EM_DIAGRAM):   SOURCE = "OUTPUT";
+MPRINT(EM_DIAGRAM):   NAME = "LOG_REP_debtinc";
+MPRINT(EM_DIAGRAM):   NMISS = 615;
+MPRINT(EM_DIAGRAM):   NLEVEL = .;
+MPRINT(EM_DIAGRAM):   MIN = 2.04988663216609;
+MPRINT(EM_DIAGRAM):   MAX = 4.12401477516662;
+MPRINT(EM_DIAGRAM):   MEAN = 3.51636219658896;
+MPRINT(EM_DIAGRAM):   STD = 0.25630294089113;
+MPRINT(EM_DIAGRAM):   SKEWNESS = -1.89051001503498;
+MPRINT(EM_DIAGRAM):   KURTOSIS = 6.88101393583313;
+MPRINT(EM_DIAGRAM):   output;
+MPRINT(EM_DIAGRAM):   SOURCE = "OUTPUT";
+MPRINT(EM_DIAGRAM):   NAME = "LOG_REP_delinq";
+MPRINT(EM_DIAGRAM):   NMISS = 292;
+MPRINT(EM_DIAGRAM):   NLEVEL = .;
+MPRINT(EM_DIAGRAM):   MIN = 0;
+MPRINT(EM_DIAGRAM):   MAX = 1.62492710483919;
+MPRINT(EM_DIAGRAM):   MEAN = 0.21724196986086;
+MPRINT(EM_DIAGRAM):   STD = 0.44387421477117;
+MPRINT(EM_DIAGRAM):   SKEWNESS = 1.90778557026351;
+MPRINT(EM_DIAGRAM):   KURTOSIS = 2.432049978254;
+MPRINT(EM_DIAGRAM):   output;
+MPRINT(EM_DIAGRAM):   SOURCE = "OUTPUT";
+MPRINT(EM_DIAGRAM):   NAME = "LOG_REP_derog";
+MPRINT(EM_DIAGRAM):   NMISS = 352;
+MPRINT(EM_DIAGRAM):   NLEVEL = .;
+MPRINT(EM_DIAGRAM):   MIN = 0;
+MPRINT(EM_DIAGRAM):   MAX = 1.30266643086797;
+MPRINT(EM_DIAGRAM):   MEAN = 0.11895867339535;
+MPRINT(EM_DIAGRAM):   STD = 0.3163537531489;
+MPRINT(EM_DIAGRAM):   SKEWNESS = 2.53828632114408;
+MPRINT(EM_DIAGRAM):   KURTOSIS = 5.17594336078051;
+MPRINT(EM_DIAGRAM):   output;
+MPRINT(EM_DIAGRAM):   SOURCE = "OUTPUT";
+MPRINT(EM_DIAGRAM):   NAME = "LOG_REP_loan";
+MPRINT(EM_DIAGRAM):   NMISS = 0;
+MPRINT(EM_DIAGRAM):   NLEVEL = .;
+MPRINT(EM_DIAGRAM):   MIN = 7.00397413672268;
+MPRINT(EM_DIAGRAM):   MAX = 10.8840216672175;
+MPRINT(EM_DIAGRAM):   MEAN = 9.66886897904097;
+MPRINT(EM_DIAGRAM):   STD = 0.56739710303053;
+MPRINT(EM_DIAGRAM):   SKEWNESS = -0.40557095599206;
+MPRINT(EM_DIAGRAM):   KURTOSIS = 0.70102708092545;
+MPRINT(EM_DIAGRAM):   output;
+MPRINT(EM_DIAGRAM):   SOURCE = "OUTPUT";
+MPRINT(EM_DIAGRAM):   NAME = "LOG_REP_mortdue";
+MPRINT(EM_DIAGRAM):   NMISS = 252;
+MPRINT(EM_DIAGRAM):   NLEVEL = .;
+MPRINT(EM_DIAGRAM):   MIN = 7.63240112660145;
+MPRINT(EM_DIAGRAM):   MAX = 12.228861152608;
+MPRINT(EM_DIAGRAM):   MEAN = 11.0241418618343;
+MPRINT(EM_DIAGRAM):   STD = 0.63638611805217;
+MPRINT(EM_DIAGRAM):   SKEWNESS = -0.93101723186006;
+MPRINT(EM_DIAGRAM):   KURTOSIS = 1.81157515284363;
+MPRINT(EM_DIAGRAM):   output;
+MPRINT(EM_DIAGRAM):   SOURCE = "OUTPUT";
+MPRINT(EM_DIAGRAM):   NAME = "LOG_REP_ninq";
+MPRINT(EM_DIAGRAM):   NMISS = 259;
+MPRINT(EM_DIAGRAM):   NLEVEL = .;
+MPRINT(EM_DIAGRAM):   MIN = 0;
+MPRINT(EM_DIAGRAM):   MAX = 1.98437474663128;
+MPRINT(EM_DIAGRAM):   MEAN = 0.55020442065582;
+MPRINT(EM_DIAGRAM):   STD = 0.59516499706343;
+MPRINT(EM_DIAGRAM):   SKEWNESS = 0.6335026913345;
+MPRINT(EM_DIAGRAM):   KURTOSIS = -0.74272402853339;
+MPRINT(EM_DIAGRAM):   output;
+MPRINT(EM_DIAGRAM):   SOURCE = "OUTPUT";
+MPRINT(EM_DIAGRAM):   NAME = "LOG_REP_value";
+MPRINT(EM_DIAGRAM):   NMISS = 54;
+MPRINT(EM_DIAGRAM):   NLEVEL = .;
+MPRINT(EM_DIAGRAM):   MIN = 8.98732181285012;
+MPRINT(EM_DIAGRAM):   MAX = 12.5296298582498;
+MPRINT(EM_DIAGRAM):   MEAN = 11.4095920841975;
+MPRINT(EM_DIAGRAM):   STD = 0.49021841908437;
+MPRINT(EM_DIAGRAM):   SKEWNESS = -0.15160668127771;
+MPRINT(EM_DIAGRAM):   KURTOSIS = 0.47295278059592;
+MPRINT(EM_DIAGRAM):   output;
+MPRINT(EM_DIAGRAM):   SOURCE = "OUTPUT";
+MPRINT(EM_DIAGRAM):   NAME = "LOG_REP_yoj";
+MPRINT(EM_DIAGRAM):   NMISS = 250;
+MPRINT(EM_DIAGRAM):   NLEVEL = .;
+MPRINT(EM_DIAGRAM):   MIN = 0;
+MPRINT(EM_DIAGRAM):   MAX = 3.48952823684632;
+MPRINT(EM_DIAGRAM):   MEAN = 1.93093654740314;
+MPRINT(EM_DIAGRAM):   STD = 0.92788039255257;
+MPRINT(EM_DIAGRAM):   SKEWNESS = -0.51439909026131;
+MPRINT(EM_DIAGRAM):   KURTOSIS = -0.53708159804992;
+MPRINT(EM_DIAGRAM):   output;
+MPRINT(EM_DIAGRAM):   SOURCE = "OUTPUT";
+MPRINT(EM_DIAGRAM):   NAME = "LOG_yoj";
+MPRINT(EM_DIAGRAM):   NMISS = 250;
+MPRINT(EM_DIAGRAM):   NLEVEL = .;
+MPRINT(EM_DIAGRAM):   MIN = 0;
+MPRINT(EM_DIAGRAM):   MAX = 3.73766961828336;
+MPRINT(EM_DIAGRAM):   MEAN = 1.93146394382402;
+MPRINT(EM_DIAGRAM):   STD = 0.92880918038735;
+MPRINT(EM_DIAGRAM):   SKEWNESS = -0.5092734176377;
+MPRINT(EM_DIAGRAM):   KURTOSIS = -0.53331205794762;
+MPRINT(EM_DIAGRAM):   output;
+MPRINT(EM_DIAGRAM):   run;
+96664      data WORK.TRANSFOR_03AGRT5_STATISTIC;
+MPRINT(EM_DIAGRAM):    data WORK.TRANSFOR_03AGRT5_STATISTIC;
+96665      set WORK.Trans_TEMP;
+MPRINT(EM_DIAGRAM):   set WORK.Trans_TEMP;
+96666      run;
+MPRINT(EM_DIAGRAM):   run;
+
+NOTE: There were 11 observations read from the data set WORK.TRANS_TEMP.
+NOTE: The data set WORK.TRANSFOR_03AGRT5_STATISTIC has 11 observations and 10 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+96667      %exploreSample(DATA=EMWS1.Repl_TRAIN, OUTPUT=EMWS1.Trans_SAMPLE_DATA,
+96667    ! METADATA=EMWS1.Repl_CMeta_TRAIN, VARS=, METHOD=FIRSTN, SIZE=DEFAULT, ALPHA=0.01,
+96667    ! PVALUE=0.01, SEED=12345);
+MPRINT(EM_DIAGRAM):   
+MPRINT(EXPLORESAMPLE):   filename x catalog 'sashelp.emutil.exploreobs.source';
+NOTE: %INCLUDE (level 1) file X is file SASHELP.EMUTIL.EXPLOREOBS.SOURCE.
+96668     +/*------------------------------------------------------------------
+96669     +  MACRO EXPLOREOBS
+96670     +
+96671     +  SUPPORT:  SASDHD - David Duling
+96672     +  PRODUCT:  Enterprise Miner
+96673     +
+96674     +  DESCRIPTION:
+96675     +  Generates maximum and default numbers of observations to
+96676     +  download for visualization depending on the record length.
+96677     +
+96678     +  Values were determined by trial and error using typical
+96679     +  Windows workstation configurations.
+96680     +
+96681     +  Discrete sets of values are returned so that user experience
+96682     +  will be consitent with similar sized data sets.
+96683     +
+96684     +  These macro variables are set:
+96685     +  _exploreobs_max -- maximum number of obs downloadable
+96686     +  _exploreobs_def -- default number of obs to be downloaded
+96687     +  _exploreobs_recl - record length.  Might be useful for reporting.
+96688     +
+96689     +  Use the _exploreobs_max to set limit the GUI selection of
+96690     +  observations for downloading.  The GUI selection for obs
+96691     +  could be reduced to "Default" and "Max".
+96692     +
+96693     +  Parameters
+96694     +  data=   libname.memname of input data
+96695     +  vars=   subset list of variables.
+96696     +          downloading 1 out of 500 really does work like downloading
+96697     +          1 out of 1 vars.  Users may select a subset of vars for
+96698     +                   visualizations.  Pass in the list as space delimited
+96699     +          var names.  If vars is not specified, the record length
+96700     +          of the entire data will be used.
+96701     +  NBYTES=   maximum number of bytes that shouldn't be exceeded.
+96702     +
+96703     +  Control
+96704     +  Users may control the values by entering these macro variables.
+96705     +            EM_EXPLOREOBS_MAX
+96706     +            EM_EXPLOREOBS_DEFAULT
+96707     +  These values override the computed values.
+96708     +
+96709     +  Debugging
+96710     +  %let _exploreobs_debug=1 ;
+96711     +--------------------------------------------------------------------
+96712     +  HISTORY: 20APR2004. sasdhd. pushed.
+96713     +           18DEC2004. sasdhd. S0280556.
+96714     +           07SEP2007. sasdhd. HK1009586
+96715     +--------------------------------------------------------------------*/
+96716     +
+96717     +%macro exploreobs(data=,vars=, nbytes=) ;
+96718     +
+96719     +   /*--- variable definitions ---*/
+96720     +   %global _exploreobs_max _exploreobs_def _exploreobs_recl _exploreobs_debug ;
+96721     +   %local xobs xvars xlen vlen xi vname vlist ;
+96722     +   %local _exp_source _exp_notes ;
+96723     +
+96724     +   /*--- USER definitions ---*/
+96725     +   %global EM_EXPLOREOBS_MAX EM_EXPLOREOBS_DEFAULT ;
+96726     +
+96727     +   /*--- variable intializations ---*/
+96728     +   %let _exploreobs_max=0 ;
+96729     +   %let _exploreobs_def=0 ;
+96730     +   %let _exploreobs_recl=0 ;
+96731     +   %let xvars= 0 ;
+96732     +   %let xlen = 0 ;
+96733     +   %let xobs = 0 ;
+96734     +
+96735     +   /*--- data error checks ---*/
+96736     +   %if "&data" eq "" %then %do ;
+96737     +            %put NOTE: DATA is not specified. ;
+96738     +            %goto term ;
+96739     +      %end ;
+96740     +
+96741     +   %let dsid=%sysfunc(open(&data)) ;
+96742     +   %if not &dsid %then %do ;
+96743     +            %put NOTE: DATA &data is not available. ;
+96744     +            %goto term ;
+96745     +      %end ;
+96746     +
+96747     +   /*--- if a vars list exists generate a subset ---*/
+96748     +   %if &vars ne %then %do ;
+96749     +         %let dsid=%sysfunc(close(&dsid)) ;
+96750     +         %if &_exploreobs_debug ne 1 %then %do ;
+96751     +                  %let _exp_source=%sysfunc(getoption(SOURCE)) ;
+96752     +            %let _exp_notes =%sysfunc(getoption(NOTES)) ;
+96753     +                  options nosource nonotes ;
+96754     +         %end ;
+96755     +         data _exploreobs_temp_data ;
+96756     +         set &data(obs=0) ;
+96757     +          keep &vars ;
+96758     +         run;
+96759     +         %if &_exploreobs_debug ne 1 %then %do ;
+96760     +                  options &_exp_source &_exp_notes ;
+96761     +         %end ;
+96762     +         %let dsid=%sysfunc(open(_exploreobs_temp_data)) ;
+96763     +         %if &dsid eq 0 %then %do ;
+96764     +                  %put NOTE: Sample is not available.;
+96765     +                  %goto term ;
+96766     +            %end ;
+96767     +      %end ;
+96768     +
+96769     +   /*--- get var attributes ---*/
+96770     +   %let xvars=%sysfunc(attrn(&dsid,nvars)) ;
+96771     +   %let xobs= %sysfunc(attrn(&dsid,nobs )) ;
+96772     +   %let xlen= %sysfunc(attrn(&dsid,lrecl)) ;
+96773     +   %let dsid= %sysfunc(close(&dsid)) ;
+96774     +
+96775     +   /*--- set default and max obs ---*/
+96776     +   %let _exploreobs_recl=%eval(&xlen) ;
+96777     +   %if &_exploreobs_recl eq 0 %then %do ;
+96778     +             %let _exploreobs_max= 0 ;
+96779     +             %let _exploreobs_def= 0 ;
+96780     +             %goto term ;
+96781     +
+96782     +   %end ;
+96783     +   %else
+96784     +   %if &_exploreobs_recl le 32 %then %do ;
+96785     +             %let _exploreobs_max=100000 ;
+96786     +             %let _exploreobs_def= 10000 ;
+96787     +   %end ;
+96788     +   %else
+96789     +   %if &_exploreobs_recl le 128 %then %do ;
+96790     +             %let _exploreobs_max=60000 ;
+96791     +             %let _exploreobs_def= 6000 ;
+96792     +   %end ;
+96793     +   %else
+96794     +   %if &_exploreobs_recl lt 1000 %then %do ;
+96795     +             %let _exploreobs_max=20000 ;
+96796     +             %let _exploreobs_def= 2000 ;
+96797     +   %end ;
+96798     +   %else
+96799     +   %if &_exploreobs_recl lt 5000 %then %do ;
+96800     +             %let _exploreobs_max= 10000 ;
+96801     +             %let _exploreobs_def=  1000 ;
+96802     +   %end ;
+96803     +   %else
+96804     +   %if &_exploreobs_recl lt 20000 %then %do ;
+96805     +             %let _exploreobs_max= 5000 ;
+96806     +             %let _exploreobs_def=  500 ;
+96807     +   %end ;
+96808     +   %else %do ;
+96809     +             %let _exploreobs_max= 1000 ;
+96810     +             %let _exploreobs_def=  200 ;
+96811     +   %end ;
+96812     +
+96813     +   /*--- Users options ---*/
+96814     +   %if &EM_EXPLOREOBS_MAX ne %then %do ;
+96815     +            %let _exploreobs_max= %eval(&EM_EXPLOREOBS_MAX) ;
+96816     +   %end;
+96817     +   %if &EM_EXPLOREOBS_DEFAULT ne %then %do ;
+96818     +            %let _exploreobs_def= %eval(&EM_EXPLOREOBS_DEFAULT) ;
+96819     +   %end;
+96820     +
+96821     +    /*--- S0868273 ---*/
+96822     +    %if "&NBYTES" ne "" %then %do;
+96823     +       %let nbytes_nrows = %eval(&nbytes/ &_exploreobs_recl);
+96824     +       %if &EM_EXPLOREOBS_MAX ne %then %do ;
+96825     +           %let _exploreobs_max   = %sysfunc(min(&nbytes_nrows ,
+96825    !+&EM_EXPLOREOBS_MAX));
+96826     +       %end;
+96827     +
+96828     +       %if &EM_EXPLOREOBS_DEFAULT ne %then %do ;
+96829     +          %let nbytes_nrows      = %eval(&nbytes_nrows/10);
+96830     +          %let _exploreobs_def   = %sysfunc(min(&nbytes_nrows ,
+96830    !+&EM_EXPLOREOBS_DEFAULT));
+96831     +          %if ^&_exploreobs_def %then
+96832     +              %let _exploreobs_def = 1;
+96833     +
+96834     +       %end;
+96835     +    %end;
+96836     +
+96837     +   /*--- Terminate ---*/
+96838     +   %term:
+96839     +
+96840     +   %put NOTE: EXPLOREOBS &data : vars= &xvars : recl= &_exploreobs_recl :
+96840    !+max=&_exploreobs_max : def= &_exploreobs_def ;
+96841     +%mend ;
+96842     +
+96843     +
+NOTE: %INCLUDE (level 1) ending.
+MPRINT(EXPLORESAMPLE):   filename x;
+NOTE: Fileref X has been deassigned.
+NOTE: EXPLOREOBS EMWS1.Repl_TRAIN : vars= 24 : recl= 189 : max=20000 : def= 2000
+MPRINT(EXPLORESAMPLE):   ;
+MPRINT(HPDM_PERFORMANCE):  ;
+PERFORMANCE  DETAILS
+MPRINT(EXPLORESAMPLE):  ;
+*------------------------------------------------------------*
+* FirstN/Top sample
+*------------------------------------------------------------*
+MPRINT(EXPLORESAMPLE):   data EMWS1.Trans_SAMPLE_DATA;
+MPRINT(EXPLORESAMPLE):   set EMWS1.Repl_TRAIN(obs= 2000 );
+MPRINT(EXPLORESAMPLE):   run;
+
+NOTE: View EMWS1.REPL_TRAIN.VIEW used (Total process time):
+      real time           0.04 seconds
+      cpu time            0.04 seconds
+      
+NOTE: There were 2979 observations read from the data set EMWS1.PART_TRAIN.
+NOTE: There were 2000 observations read from the data set EMWS1.REPL_TRAIN.
+NOTE: The data set EMWS1.TRANS_SAMPLE_DATA has 2000 observations and 24 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.06 seconds
+      cpu time            0.06 seconds
+      
+
+MPRINT(EM_DIAGRAM):  ;
+
+96844      proc print data = EMWS1.Trans_RESULT(obs=500) noobs label;
+MPRINT(EM_DIAGRAM):    proc print data = EMWS1.Trans_RESULT(obs=500) noobs label;
+96845      title9 "%sysfunc(sasmsg(sashelp.dmine, rpt_computedtransformations_title, NOQUOTE))"
+96845    ! ;
+MPRINT(EM_DIAGRAM):   title9 "Computed Transformations";
+96846      title10 "%sysfunc(sasmsg(sashelp.dmine, rpt_maxObsPrinted_title, NOQUOTE))";
+MPRINT(EM_DIAGRAM):   title10 "(maximum 500 observations printed)";
+MPRINT(EM_DIAGRAM):   var INPUTNAME ROLE INPUTLEVEL NAME LEVEL FORMULA;
+MPRINT(EM_DIAGRAM):   run;
+96847      var INPUTNAME ROLE INPUTLEVEL NAME LEVEL FORMULA;
+96848      run;
+
+NOTE: There were 11 observations read from the data set EMWS1.TRANS_RESULT.
+NOTE: The PROCEDURE PRINT printed page 48.
+NOTE: PROCEDURE PRINT used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+96849      title9;
+MPRINT(EM_DIAGRAM):   title9;
+96850      title10;
+MPRINT(EM_DIAGRAM):   title10;
+MPRINT(EM_DIAGRAM):    proc printto;
+MPRINT(EM_DIAGRAM):   run;

@@ -1,0 +1,18 @@
+ 
+                                                                                                                                                                                                                                                                
+ 
+                             Gini       Level for     Calculated      New                                                                                    Gini
+Obs    Variable           Statistic    Interactive       Role        Role       Level      Label                                                           Ordering
+
+  1    LOG_REP_debtinc      64.355      INTERVAL       Input        Default    INTERVAL    Transformed: Replacement: Debt to income ratio                      1   
+  2    LOG_REP_clage        27.143      INTERVAL       Input        Default    INTERVAL    Transformed: Replacement: Age of oldest trade line in months        2   
+  3    LOG_REP_ninq         20.940      INTERVAL       Input        Default    INTERVAL    Transformed: Replacement: Number of recent credit inquiries         3   
+  4    LOG_REP_value        20.771      INTERVAL       Input        Default    INTERVAL    Transformed: Replacement: Value of current property                 4   
+  5    job                  16.512      NOMINAL        Rejected     Default    NOMINAL     Prof/exec sales mngr office self other                              5   
+  6    LOG_REP_loan         12.733      INTERVAL       Rejected     Default    INTERVAL    Transformed: Replacement: Amount of current loan request            6   
+  7    LOG_REP_clno         10.711      INTERVAL       Rejected     Default    INTERVAL    Transformed: Replacement: Number of trade (credit) lines            7   
+  8    LOG_REP_mortdue      10.543      INTERVAL       Rejected     Default    INTERVAL    Transformed: Replacement: Amount due on existing mortgage           8   
+  9    LOG_REP_yoj          10.510      INTERVAL       Rejected     Default    INTERVAL    Transformed: Replacement: Years on current job                      9   
+ 10    reason                3.975      NOMINAL        Rejected     Default    NOMINAL     Home improvement or debt consolidation                             10   
+ 11    LOG_REP_derog         2.773      INTERVAL       Rejected     Default    INTERVAL    Transformed: Replacement: Number of major derogatory reports       11   
+ 12    LOG_REP_delinq        2.150      INTERVAL       Rejected     Default    INTERVAL    Transformed: Replacement: Number of delinquent trade lines         12   

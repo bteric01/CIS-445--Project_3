@@ -1,0 +1,20 @@
+ 
+                                                                                                                                                                                                                                                                
+ 
+ 
+Limits and Replacement Values for Interval Variables
+
+                                           Lower                       Upper
+            Replace            Lower    Replacement        Upper    Replacement
+Variable    Variable           limit       Value           Limit       Value
+
+clage       REP_clage         -80.78        -80.78        443.09        443.09 
+clno        REP_clno           -9.57         -9.57         52.13         52.13 
+debtinc     REP_debtinc         6.77          6.77         60.81         60.81 
+delinq      REP_delinq         -3.15         -3.15          4.08          4.08 
+derog       REP_derog          -2.20         -2.20          2.68          2.68 
+loan        REP_loan       -15948.42     -15948.42      53316.59      53316.59 
+mortdue     REP_mortdue    -57459.22     -57459.22     204609.03     204609.03 
+ninq        REP_ninq           -3.96         -3.96          6.27          6.27 
+value       REP_value      -71444.81     -71444.81     276406.04     276406.04 
+yoj         REP_yoj           -14.03        -14.03         31.77         31.77 

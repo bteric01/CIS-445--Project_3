@@ -1,0 +1,576 @@
+ 
+                                                                                                                                                                                                                                                                
+ 
+ 
+Variable Summary
+
+            Measurement    Frequency
+Role           Level         Count
+
+INPUT        ORDINAL            4   
+REJECTED     INTERVAL          20   
+REJECTED     NOMINAL            2   
+TARGET       BINARY             1   
+ 
+                                                                                                                                                                                                                                                                
+ 
+ 
+Model Events
+
+                                  Number
+                   Measurement      of
+Target    Event       Level       Levels      Order                    Label
+
+ bad        1        BINARY          2      Descending    Default or seriously delinquent
+ 
+                                                                                                                                                                                                                                                                
+ 
+ 
+Predicted and decision variables
+
+Type         Variable    Label
+
+TARGET        bad        Default or seriously delinquent
+PREDICTED     P_bad1     Predicted: bad=1               
+RESIDUAL      R_bad1     Residual: bad=1                
+PREDICTED     P_bad0     Predicted: bad=0               
+RESIDUAL      R_bad0     Residual: bad=0                
+FROM          F_bad      From: bad                      
+INTO          I_bad      Into: bad                      
+ 
+                                                                                                                                                                                                                                                                
+ 
+ 
+
+The NEURAL Procedure
+
+Preliminary       Starting         Objective         Number
+ Training          Random           Function           of        Terminating
+    Run             Seed             Value         Iterations     Criteria
+
+        1               12345    0.312994986621           10                
+        2            66513337    0.322433406365           10                
+        3          1057600706     0.31739252503           10                
+        4          1744555812    0.316648150252           10                
+        5            56992680    0.314952751467           10                
+ 
+                                                                                                                                                                                                                                                                
+ 
+ 
+
+The NEURAL Procedure
+
+                                             Optimization Start
+                                             Parameter Estimates
+                                                    Gradient           Lower           Upper    Active
+                                                   Objective           Bound           Bound    Bound
+  N Parameter                       Estimate        Function      Constraint      Constraint    Constraint
+
+  1 GRP_LOG_REP_clage1_H11          0.368404     0.000014159           1E-10               .                
+  2 GRP_LOG_REP_clage2_H11          0.124386        0.001329           1E-10               .                
+  3 GRP_LOG_REP_clage3_H11          0.390544        0.000958           1E-10               .                
+  4 GRP_LOG_REP_clage4_H11             1E-10       -0.000267           1E-10               .     Lower BC   
+  5 GRP_LOG_REP_debtinc1_H11           1E-10       -0.000243           1E-10               .     Lower BC   
+  6 GRP_LOG_REP_debtinc2_H11        0.351919       -0.000491           1E-10               .                
+  7 GRP_LOG_REP_debtinc3_H11        0.587117       -0.000599           1E-10               .                
+  8 GRP_LOG_REP_debtinc4_H11        1.146300       -0.000464           1E-10               .                
+  9 GRP_LOG_REP_ninq1_H11           0.945258        0.000392           1E-10               .                
+ 10 GRP_LOG_REP_ninq3_H11       9.999999E-11       -0.000451           1E-10               .     Lower BC   
+ 11 GRP_LOG_REP_ninq4_H11           1.050411       -0.000171           1E-10               .                
+ 12 GRP_LOG_REP_value1_H11             1E-10        0.000194           1E-10               .     Lower BC   
+ 13 GRP_LOG_REP_value2_H11          0.057001        0.001373           1E-10               .                
+ 14 GRP_LOG_REP_value3_H11          0.073139        0.000467           1E-10               .                
+ 15 GRP_LOG_REP_value4_H11          1.099933       -0.000197           1E-10               .                
+ 16 GRP_LOG_REP_clage1_H12          0.946705        0.002504           1E-10               .                
+ 17 GRP_LOG_REP_clage2_H12          0.375590        0.002232           1E-10               .                
+ 18 GRP_LOG_REP_clage3_H12          0.388700        0.001675           1E-10               .                
+ 19 GRP_LOG_REP_clage4_H12      9.999999E-11        0.001490           1E-10               .     Lower BC   
+ 20 GRP_LOG_REP_debtinc1_H12    9.999999E-11        0.001360           1E-10               .     Lower BC   
+ 21 GRP_LOG_REP_debtinc2_H12        0.466741        0.000496           1E-10               .                
+ 22 GRP_LOG_REP_debtinc3_H12           1E-10        0.000251           1E-10               .     Lower BC   
+ 23 GRP_LOG_REP_debtinc4_H12        0.545646    -0.000054685           1E-10               .                
+ 24 GRP_LOG_REP_ninq1_H12           0.240131        0.002753           1E-10               .                
+ 25 GRP_LOG_REP_ninq3_H12           1.358084        0.001797           1E-10               .                
+ 26 GRP_LOG_REP_ninq4_H12              1E-10       -0.002083           1E-10               .     Lower BC   
+ 27 GRP_LOG_REP_value1_H12             1E-10        0.002671           1E-10               .     Lower BC   
+ 28 GRP_LOG_REP_value2_H12          0.931174        0.002357           1E-10               .                
+ 29 GRP_LOG_REP_value3_H12             1E-10        0.000658           1E-10               .     Lower BC   
+ 30 GRP_LOG_REP_value4_H12          1.678556       -0.000836           1E-10               .                
+ 31 GRP_LOG_REP_clage1_H13             1E-10       -0.003483           1E-10               .     Lower BC   
+ 32 GRP_LOG_REP_clage2_H13          0.685409       -0.003104           1E-10               .                
+ 33 GRP_LOG_REP_clage3_H13             1E-10       -0.001485           1E-10               .     Lower BC   
+ 34 GRP_LOG_REP_clage4_H13          0.003982        0.000199           1E-10               .                
+ 35 GRP_LOG_REP_debtinc1_H13        0.476778       -0.000955           1E-10               .                
+ 36 GRP_LOG_REP_debtinc2_H13        0.451478       -0.000456           1E-10               .                
+ 37 GRP_LOG_REP_debtinc3_H13    9.999999E-11        0.000995           1E-10               .     Lower BC   
+ 38 GRP_LOG_REP_debtinc4_H13           1E-10        0.000543           1E-10               .     Lower BC   
+ 39 GRP_LOG_REP_ninq1_H13              1E-10       -0.004034           1E-10               .     Lower BC   
+ 40 GRP_LOG_REP_ninq3_H13           0.871945       -0.002332           1E-10               .                
+ 41 GRP_LOG_REP_ninq4_H13              1E-10        0.002907           1E-10               .     Lower BC   
+ 42 GRP_LOG_REP_value1_H13          0.619626       -0.004038           1E-10               .                
+ 43 GRP_LOG_REP_value2_H13          1.283470       -0.004286           1E-10               .                
+ 44 GRP_LOG_REP_value3_H13          0.420766       -0.001764           1E-10               .                
+ 45 GRP_LOG_REP_value4_H13          1.164349        0.000732           1E-10               .                
+ 46 GRP_LOG_REP_clage1_H14          0.845546       -0.001943           1E-10               .                
+ 47 GRP_LOG_REP_clage2_H14          0.077208       -0.002016           1E-10               .                
+ 48 GRP_LOG_REP_clage3_H14             1E-10       -0.000984           1E-10               .     Lower BC   
+ 49 GRP_LOG_REP_clage4_H14             1E-10        0.003517           1E-10               .     Lower BC   
+ 50 GRP_LOG_REP_debtinc1_H14        1.372208        0.002225           1E-10               .                
+ 51 GRP_LOG_REP_debtinc2_H14        0.679819        0.002014           1E-10               .                
+ 52 GRP_LOG_REP_debtinc3_H14        0.342907        0.002200           1E-10               .                
+ 53 GRP_LOG_REP_debtinc4_H14    9.999999E-11        0.002141           1E-10               .     Lower BC   
+ 54 GRP_LOG_REP_ninq1_H14           0.178080       -0.002053           1E-10               .                
+ 55 GRP_LOG_REP_ninq3_H14              1E-10        0.002106           1E-10               .     Lower BC   
+ 56 GRP_LOG_REP_ninq4_H14           0.252805        0.001673           1E-10               .                
+ 57 GRP_LOG_REP_value1_H14          1.918081       -0.002254           1E-10               .                
+ 58 GRP_LOG_REP_value2_H14          0.194527       -0.002605           1E-10               .                
+ 59 GRP_LOG_REP_value3_H14             1E-10       -0.001014           1E-10               .     Lower BC   
+ 60 GRP_LOG_REP_value4_H14          0.356476       -0.000475           1E-10               .                
+ 61 GRP_LOG_REP_clage1_H15             1E-10       -0.001110           1E-10               .     Lower BC   
+ 62 GRP_LOG_REP_clage2_H15             1E-10        0.001387           1E-10               .     Lower BC   
+ 63 GRP_LOG_REP_clage3_H15          0.747466       -0.000154           1E-10               .                
+ 64 GRP_LOG_REP_clage4_H15          0.556534        0.001110           1E-10               .                
+ 65 GRP_LOG_REP_debtinc1_H15        0.294109        0.000805           1E-10               .                
+ 66 GRP_LOG_REP_debtinc2_H15    9.999999E-11     0.000089517           1E-10               .     Lower BC   
+ 67 GRP_LOG_REP_debtinc3_H15           1E-10        0.001888           1E-10               .     Lower BC   
+ 68 GRP_LOG_REP_debtinc4_H15    9.999999E-11        0.002267           1E-10               .     Lower BC   
+ 69 GRP_LOG_REP_ninq1_H15           0.590273       -0.002045           1E-10               .                
+ 70 GRP_LOG_REP_ninq3_H15              1E-10     0.000018770           1E-10               .     Lower BC   
+ 71 GRP_LOG_REP_ninq4_H15              1E-10        0.005000           1E-10               .     Lower BC   
+ 72 GRP_LOG_REP_value1_H15          1.690738       -0.001802           1E-10               .                
+ 73 GRP_LOG_REP_value2_H15             1E-10       -0.000558           1E-10               .     Lower BC   
+ 74 GRP_LOG_REP_value3_H15             1E-10       -0.000833           1E-10               .     Lower BC   
+ 75 GRP_LOG_REP_value4_H15             1E-10       -0.000112           1E-10               .     Lower BC   
+ 76 BIAS_H11                        2.188692        0.000331               .               .                
+ 77 BIAS_H12                       -1.908574        0.004735               .               .                
+ 78 BIAS_H13                       -1.832363       -0.007216               .               .                
+ 79 BIAS_H14                       -0.051135       -0.003720               .               .                
+ 80 BIAS_H15                       -0.407320       -0.003085               .               .                
+ 81 H11_bad1                        3.537038        0.002700               .               .                
+ 82 H12_bad1                        2.868695       -0.000363               .               .                
+ 83 H13_bad1                       -2.880106     0.000048504               .               .                
+ 84 H14_bad1                       -3.083307        0.002086               .               .                
+ 85 H15_bad1                       -2.486117        0.002037               .               .                
+ 86 BIAS_bad1                      -0.633683        0.002879               .               .                
+
+Value of Objective Function = 0.3129949866
+
+
+
+            First Order Lagrange Multipliers
+                            
+ 
+                                                Lagrange
+           Active Constraint                  Multiplier
+
+                GRP_LOG_REP_clage1_H11                 0
+                GRP_LOG_REP_clage1_H11                 0
+                GRP_LOG_REP_clage1_H11                 0
+                GRP_LOG_REP_clage1_H11                 0
+                GRP_LOG_REP_clage1_H11                 0
+                GRP_LOG_REP_clage1_H11                 0
+                GRP_LOG_REP_clage1_H11                 0
+                GRP_LOG_REP_clage1_H11                 0
+                GRP_LOG_REP_clage1_H11                 0
+                GRP_LOG_REP_clage1_H11                 0
+                GRP_LOG_REP_clage1_H11                 0
+                GRP_LOG_REP_clage1_H11                 0
+                GRP_LOG_REP_clage1_H11                 0
+                GRP_LOG_REP_clage1_H11                 0
+                GRP_LOG_REP_clage1_H11                 0
+                GRP_LOG_REP_clage1_H11                 0
+                GRP_LOG_REP_clage1_H11                 0
+                GRP_LOG_REP_clage1_H11                 0
+                GRP_LOG_REP_clage1_H11                 0
+                GRP_LOG_REP_clage1_H11                 0
+                GRP_LOG_REP_clage1_H11                 0
+                GRP_LOG_REP_clage1_H11                 0
+                GRP_LOG_REP_clage1_H11                 0
+                GRP_LOG_REP_clage1_H11                 0
+                GRP_LOG_REP_clage1_H11                 0
+                GRP_LOG_REP_clage1_H11                 0
+                GRP_LOG_REP_clage1_H11                 0
+                GRP_LOG_REP_clage1_H11                 0
+                GRP_LOG_REP_clage1_H11                 0
+                GRP_LOG_REP_clage1_H11                 0
+                GRP_LOG_REP_clage1_H11                 0
+
+
+  Projected Gradient
+ 
+     Free    Projected
+Dimension     Gradient
+
+        1  0.000014159
+        2  0.000014159
+        3  0.000014159
+        4  0.000014159
+        5  0.000014159
+        6  0.000014159
+        7  0.000014159
+        8  0.000014159
+        9  0.000014159
+       10  0.000014159
+       11  0.000014159
+       12  0.000014159
+       13  0.000014159
+       14  0.000014159
+       15  0.000014159
+       16  0.000014159
+       17  0.000014159
+       18  0.000014159
+       19  0.000014159
+       20  0.000014159
+       21  0.000014159
+       22  0.000014159
+       23  0.000014159
+       24  0.000014159
+       25  0.000014159
+       26  0.000014159
+       27  0.000014159
+       28  0.000014159
+       29  0.000014159
+       30  0.000014159
+       31  0.000014159
+       32  0.000014159
+       33  0.000014159
+       34  0.000014159
+       35  0.000014159
+       36  0.000014159
+       37  0.000014159
+       38  0.000014159
+       39  0.000014159
+       40  0.000014159
+       41  0.000014159
+       42  0.000014159
+       43  0.000014159
+       44  0.000014159
+       45  0.000014159
+       46  0.000014159
+       47  0.000014159
+       48  0.000014159
+       49  0.000014159
+       50  0.000014159
+       51  0.000014159
+       52  0.000014159
+       53  0.000014159
+       54  0.000014159
+       55  0.000014159
+ 
+                                                                                                                                                                                                                                                                
+ 
+ 
+
+The NEURAL Procedure
+
+Levenberg-Marquardt Optimization
+
+
+Minimum Iterations                                    0
+Maximum Iterations                                   50
+Maximum Function Calls                       2147483647
+Maximum CPU Time                                  14400
+ABSGCONV Gradient Criterion                     0.00001
+GCONV Gradient Criterion                           1E-8
+GCONV2 Gradient Criterion                             0
+ABSFCONV Function Criterion                           0
+FCONV Function Criterion                         0.0001
+FCONV2 Function Criterion                             0
+FSIZE Parameter                                       0
+ABSXCONV Parameter Change Criterion                   0
+XCONV Parameter Change Criterion                      0
+XSIZE Parameter                                       0
+ABSCONV Function Criterion                 0.0018348522
+Trust Region Initial Radius Factor                    1
+Singularity Tolerance (SINGULAR)                   1E-8
+Constraint Precision (LCEPS)                       1E-8
+Linearly Dependent Constraints (LCSING)            1E-8
+Releasing Active Constraints (LCDEACT)                .
+
+Levenberg-Marquardt Optimization
+
+Scaling Update of More (1978)
+
+Parameter Estimates              86
+Lower Bounds                     75
+Upper Bounds                      0
+
+                                             Optimization Start
+
+Active Constraints (+)                             30  Objective Function                       0.3129949866
+Max Abs Gradient Element                 0.0072157298  Radius                                              1
+
+
+                                                                                                         Ratio
+                                                                                                       Between
+                                                                                                        Actual
+                                                                 Objective     Max Abs                     and
+                     Function         Active        Objective     Function    Gradient               Predicted
+Iter     Restarts       Calls    Constraints         Function       Change     Element     Lambda       Change
+
+   1            0           3             30'         0.31284     0.000156      0.0111     0.0287        0.203
+   2            0           5             30'         0.31256     0.000275     0.00957      0.114        0.348
+   3            0           6             30'         0.31232     0.000249     0.00661     0.0820        0.479
+   4            0           7             30'         0.31204     0.000273     0.00500     0.0865        0.653
+   5            0           8             30'         0.31188     0.000157     0.00413     0.0716        0.660
+   6            0           9             30'         0.31179     0.000095     0.00448     0.0594        0.531
+   7            0          10             30'         0.31164     0.000152     0.00754     0.0155        0.459
+   8            0          12             30'         0.31154     0.000102     0.00742     0.0342        0.319
+   9            0          13             30'         0.31140     0.000131     0.00624     0.0321        0.428
+  10            0          14             30'         0.31133     0.000076     0.00652     0.0304        0.317
+  11            0          15             30'         0.31123     0.000093     0.00604     0.0280        0.382
+  12            0          16             30'         0.31117     0.000063     0.00648     0.0263        0.289
+  13            0          17             30'         0.31111     0.000067     0.00638     0.0239        0.302
+  14            0          18             30'         0.31105     0.000055     0.00675     0.0225        0.254
+  15            0          19             30'         0.31101     0.000042     0.00706     0.0203        0.196
+  16            0          20             30'         0.31096     0.000052     0.00721     0.0193        0.228
+  17            0          21             31'         0.31092     0.000032     0.00694     0.0175        0.145
+  18            0          22             31'         0.31088     0.000042     0.00756     0.0166        0.181
+  19            0          23             31'         0.31088      3.82E-6     0.00851     0.0149       0.0172
+  20            0          24             31'         0.31077     0.000110     0.00497     0.0389        0.449
+  21            0          26             31'         0.31074     0.000029     0.00387     0.0770        0.345
+  22            0          27             31'         0.31072     0.000022     0.00264     0.0553        0.455
+  23            0          28             30'         0.31066     0.000056     0.00118      0.227        0.800
+  24            0          29             29'         0.31062     0.000040     0.00138     0.0372        0.820
+  25            0          30             28'         0.31052     0.000103     0.00116     0.0287        0.903
+  26            0          31             27'         0.31035     0.000165     0.00123    0.00383        0.918
+  27            0          32             26'         0.31018     0.000169     0.00272    0.00131        0.613
+  28            0          34             25'         0.31013     0.000051     0.00236    0.00913        0.409
+  29            0          35             24'         0.31009     0.000047     0.00146    0.00928        0.473
+  30            0          37             24'         0.31008     3.027E-6     0.00448     0.0208       0.0656
+  31            0          38             23'         0.31006     0.000023     0.00217     0.0436        0.522
+  32            0          39             23'         0.31006     3.629E-6     0.00273     0.0293        0.244
+  33            0          40             22'         0.31003     0.000023     0.00119     0.0899        0.792
+  34            0          41             23'         0.31001     0.000025     0.00106     0.0304        0.867
+  35            0          42             23'         0.30998     0.000029     0.00150    0.00870        0.903
+  36            0          43             22'         0.30994     0.000043    0.000848    0.00321        0.994
+  37            0          46             22'         0.30993     2.042E-6     0.00104     0.0830        0.572
+  38            0          47             21'         0.30993     2.654E-6    0.000450     0.0673        0.835
+  39            0          50             21'         0.30993     1.528E-7    0.000500      0.711        0.281
+  40            0          51             21          0.30993     4.577E-7    0.000191      0.661        0.800
+  41            0          52             21          0.30993     6.234E-7    0.000082      0.313        0.970
+  42            0          53             21          0.30993     1.185E-6    0.000063      0.153        0.996
+  43            0          54             22          0.30993     2.296E-6    0.000138     0.0748        0.991
+  44            0          55             21'         0.30992     6.659E-6    0.000063     0.0239        0.990
+  45            0          56             21'         0.30991     0.000012     0.00102     0.0112        0.925
+  46            0          59             21'         0.30991     2.727E-7    0.000994      0.506        0.167
+  47            0          60             20'         0.30991      1.03E-6    0.000425      0.306        0.690
+  48            0          62             21'         0.30991     1.129E-7    0.000424      1.144        0.241
+  49            0          63             21          0.30991     3.078E-7    0.000166      0.676        0.797
+  50            0          64             21'         0.30991     4.218E-7    0.000052      0.324        0.976
+
+                                            Optimization Results
+
+Iterations                                         50  Function Calls                                     66
+Jacobian Calls                                     52  Active Constraints (+)                             22
+Objective Function                       0.3099063202  Max Abs Gradient Element                 0.0000521663
+Lambda                                   0.3241264469  Actual Over Pred Change                   0.975660122
+Radius                                   0.0020908205                                                       
+
+LEVMAR needs more than 50 iterations or 2147483647 function calls.                                
+
+WARNING: LEVMAR Optimization cannot be completed.
+
+ 
+                                                                                                                                                                                                                                                                
+ 
+ 
+
+The NEURAL Procedure
+
+                            Optimization Results
+                             Parameter Estimates
+                                                    Gradient    Active
+                                                   Objective    Bound
+  N Parameter                       Estimate        Function    Constraint
+
+  1 GRP_LOG_REP_clage1_H11          0.450897    -0.000004594                
+  2 GRP_LOG_REP_clage2_H11          0.099793    -0.000003610                
+  3 GRP_LOG_REP_clage3_H11          0.284041     0.000005160                
+  4 GRP_LOG_REP_clage4_H11             1E-10        0.000332     Lower BC   
+  5 GRP_LOG_REP_debtinc1_H11           1E-10        0.001360     Lower BC   
+  6 GRP_LOG_REP_debtinc2_H11        0.678893     0.000001761                
+  7 GRP_LOG_REP_debtinc3_H11        1.134202     0.000004181                
+  8 GRP_LOG_REP_debtinc4_H11        1.708932    -0.000004565                
+  9 GRP_LOG_REP_ninq1_H11           1.642794    -0.000011573                
+ 10 GRP_LOG_REP_ninq3_H11           0.060227    -0.000001045                
+ 11 GRP_LOG_REP_ninq4_H11           1.007975    -0.000008903                
+ 12 GRP_LOG_REP_value1_H11          0.098308    -0.000052166                
+ 13 GRP_LOG_REP_value2_H11          0.017978    -0.000004128                
+ 14 GRP_LOG_REP_value3_H11          0.143061     0.000000996                
+ 15 GRP_LOG_REP_value4_H11          1.534885     0.000006863                
+ 16 GRP_LOG_REP_clage1_H12          1.662726    -0.000025997                
+ 17 GRP_LOG_REP_clage2_H12          0.654973    -0.000011396                
+ 18 GRP_LOG_REP_clage3_H12          0.187110     0.000007344                
+ 19 GRP_LOG_REP_clage4_H12      9.999999E-11        0.001625     Lower BC   
+ 20 GRP_LOG_REP_debtinc1_H12    9.999999E-11        0.000561     Lower BC   
+ 21 GRP_LOG_REP_debtinc2_H12        0.543477     0.000003409                
+ 22 GRP_LOG_REP_debtinc3_H12        0.011720    -0.000004217                
+ 23 GRP_LOG_REP_debtinc4_H12        0.420693    -0.000003698                
+ 24 GRP_LOG_REP_ninq1_H12           0.373737    -0.000021805                
+ 25 GRP_LOG_REP_ninq3_H12           1.203970     0.000007437                
+ 26 GRP_LOG_REP_ninq4_H12           0.277401     0.000011836                
+ 27 GRP_LOG_REP_value1_H12             1E-10    -0.000012625     Lower BC   
+ 28 GRP_LOG_REP_value2_H12          1.514515    -0.000036485                
+ 29 GRP_LOG_REP_value3_H12             1E-10        0.000850     Lower BC   
+ 30 GRP_LOG_REP_value4_H12          1.475754     0.000027705                
+ 31 GRP_LOG_REP_clage1_H13          0.035208     0.000004562                
+ 32 GRP_LOG_REP_clage2_H13          0.908245     0.000018246                
+ 33 GRP_LOG_REP_clage3_H13             1E-10     0.000062515     Lower BC   
+ 34 GRP_LOG_REP_clage4_H13          0.035559    -0.000008833                
+ 35 GRP_LOG_REP_debtinc1_H13        0.235022     0.000014685                
+ 36 GRP_LOG_REP_debtinc2_H13        0.410392     0.000010140                
+ 37 GRP_LOG_REP_debtinc3_H13    9.999999E-11        0.000463     Lower BC   
+ 38 GRP_LOG_REP_debtinc4_H13        0.188972    -0.000012987                
+ 39 GRP_LOG_REP_ninq1_H13              1E-10        0.000234     Lower BC   
+ 40 GRP_LOG_REP_ninq3_H13           1.116314     0.000027388                
+ 41 GRP_LOG_REP_ninq4_H13           0.296793    -0.000013147                
+ 42 GRP_LOG_REP_value1_H13          0.025203     0.000021155                
+ 43 GRP_LOG_REP_value2_H13          3.190274     0.000003858                
+ 44 GRP_LOG_REP_value3_H13          0.166329     0.000009594                
+ 45 GRP_LOG_REP_value4_H13          1.429210     0.000008515                
+ 46 GRP_LOG_REP_clage1_H14          0.422440     0.000015139                
+ 47 GRP_LOG_REP_clage2_H14          0.016737     0.000006286                
+ 48 GRP_LOG_REP_clage3_H14             1E-10        0.000101     Lower BC   
+ 49 GRP_LOG_REP_clage4_H14             1E-10        0.001830     Lower BC   
+ 50 GRP_LOG_REP_debtinc1_H14        0.650957    -0.000003546                
+ 51 GRP_LOG_REP_debtinc2_H14        1.501128    -0.000027876                
+ 52 GRP_LOG_REP_debtinc3_H14           1E-10     0.000053670     Lower BC   
+ 53 GRP_LOG_REP_debtinc4_H14        0.009829    -0.000025766                
+ 54 GRP_LOG_REP_ninq1_H14           0.578692    -0.000006556                
+ 55 GRP_LOG_REP_ninq3_H14              1E-10        0.002829     Lower BC   
+ 56 GRP_LOG_REP_ninq4_H14           0.154546    -0.000014369                
+ 57 GRP_LOG_REP_value1_H14          2.344827    -0.000014525                
+ 58 GRP_LOG_REP_value2_H14          0.081881     0.000006617                
+ 59 GRP_LOG_REP_value3_H14             1E-10        0.002147     Lower BC   
+ 60 GRP_LOG_REP_value4_H14          0.240244    -0.000003389                
+ 61 GRP_LOG_REP_clage1_H15             1E-10        0.000158     Lower BC   
+ 62 GRP_LOG_REP_clage2_H15             1E-10        0.003447     Lower BC   
+ 63 GRP_LOG_REP_clage3_H15          1.247103    -0.000004873                
+ 64 GRP_LOG_REP_clage4_H15          2.745483    -0.000018963                
+ 65 GRP_LOG_REP_debtinc1_H15        0.377409     0.000003211                
+ 66 GRP_LOG_REP_debtinc2_H15    9.999999E-11        0.000443     Lower BC   
+ 67 GRP_LOG_REP_debtinc3_H15           1E-10        0.001766     Lower BC   
+ 68 GRP_LOG_REP_debtinc4_H15    9.999999E-11        0.002693     Lower BC   
+ 69 GRP_LOG_REP_ninq1_H15           1.698715     0.000000443                
+ 70 GRP_LOG_REP_ninq3_H15           0.081017     0.000002256                
+ 71 GRP_LOG_REP_ninq4_H15              1E-10        0.002973     Lower BC   
+ 72 GRP_LOG_REP_value1_H15          2.413525     0.000000140                
+ 73 GRP_LOG_REP_value2_H15             1E-10        0.001053     Lower BC   
+ 74 GRP_LOG_REP_value3_H15          0.135351     0.000002172                
+ 75 GRP_LOG_REP_value4_H15             1E-10        0.001247     Lower BC   
+ 76 BIAS_H11                        2.829726     0.000025380                
+ 77 BIAS_H12                       -2.377324    -0.000027733                
+ 78 BIAS_H13                       -2.175048     0.000037941                
+ 79 BIAS_H14                       -0.173580    -0.000005270                
+ 80 BIAS_H15                       -0.172572     0.000002006                
+ 81 H11_bad1                        5.490776    -0.000028881                
+ 82 H12_bad1                        6.170178    -0.000037266                
+ 83 H13_bad1                       -5.829589     0.000039138                
+ 84 H14_bad1                       -6.165307     0.000005031                
+ 85 H15_bad1                       -1.843957    -0.000004343                
+ 86 BIAS_bad1                      -0.119008    -0.000014797                
+
+Value of Objective Function = 0.3099063202
+
+
+
+            First Order Lagrange Multipliers
+                            
+ 
+                                                Lagrange
+           Active Constraint                  Multiplier
+
+ Lower BC       GRP_LOG_REP_clage4_H11          0.000332
+ Lower BC       GRP_LOG_REP_debtinc1_H11        0.001360
+ Lower BC       GRP_LOG_REP_clage4_H12          0.001625
+ Lower BC       GRP_LOG_REP_debtinc1_H12        0.000561
+ Lower BC       GRP_LOG_REP_value1_H12      -0.000012625
+ Lower BC       GRP_LOG_REP_value3_H12          0.000850
+ Lower BC       GRP_LOG_REP_clage3_H13       0.000062515
+ Lower BC       GRP_LOG_REP_debtinc3_H13        0.000463
+ Lower BC       GRP_LOG_REP_ninq1_H13           0.000234
+ Lower BC       GRP_LOG_REP_clage3_H14          0.000101
+ Lower BC       GRP_LOG_REP_clage4_H14          0.001830
+ Lower BC       GRP_LOG_REP_debtinc3_H14     0.000053670
+ Lower BC       GRP_LOG_REP_ninq3_H14           0.002829
+ Lower BC       GRP_LOG_REP_value3_H14          0.002147
+ Lower BC       GRP_LOG_REP_clage1_H15          0.000158
+ Lower BC       GRP_LOG_REP_clage2_H15          0.003447
+ Lower BC       GRP_LOG_REP_debtinc2_H15        0.000443
+ Lower BC       GRP_LOG_REP_debtinc3_H15        0.001766
+ Lower BC       GRP_LOG_REP_debtinc4_H15        0.002693
+ Lower BC       GRP_LOG_REP_ninq4_H15           0.002973
+ Lower BC       GRP_LOG_REP_value2_H15          0.001053
+ Lower BC       GRP_LOG_REP_value4_H15          0.001247
+
+
+  Projected Gradient
+ 
+     Free    Projected
+Dimension     Gradient
+
+        1 -0.000004594
+        2 -0.000003610
+        3  0.000005160
+        4  0.000001761
+        5  0.000004181
+        6 -0.000004565
+        7 -0.000011573
+        8 -0.000001045
+        9 -0.000008903
+       10 -0.000052166
+       11 -0.000004128
+       12  0.000000996
+       13  0.000006863
+       14 -0.000025997
+       15 -0.000011396
+       16  0.000007344
+       17  0.000003409
+       18 -0.000004217
+       19 -0.000003698
+       20 -0.000021805
+       21  0.000007437
+       22  0.000011836
+       23 -0.000036485
+       24  0.000027705
+       25  0.000004562
+       26  0.000018246
+       27 -0.000008833
+       28  0.000014685
+       29  0.000010140
+       30 -0.000012987
+       31  0.000027388
+       32 -0.000013147
+       33  0.000021155
+       34  0.000003858
+       35  0.000009594
+       36  0.000008515
+       37  0.000015139
+       38  0.000006286
+       39 -0.000003546
+       40 -0.000027876
+       41 -0.000025766
+       42 -0.000006556
+       43 -0.000014369
+       44 -0.000014525
+       45  0.000006617
+       46 -0.000003389
+       47 -0.000004873
+       48 -0.000018963
+       49  0.000003211
+       50  0.000000443
+       51  0.000002256
+       52  0.000000140
+       53  0.000002172
+       54  0.000025380
+       55 -0.000027733
+       56  0.000037941
+       57 -0.000005270
+       58  0.000002006
+       59 -0.000028881
+       60 -0.000037266
+       61  0.000039138
+       62  0.000005031
+       63 -0.000004343
+       64 -0.000014797
